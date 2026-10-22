@@ -1,5 +1,6 @@
 ---
 import FoodArt from './placeholders/FoodArt.astro';
+import { isExternal } from '../lib/nav';
 import type { Content } from '../lib/types';
 
 interface Props {
@@ -28,7 +29,12 @@ const tone = (i: number) => ((items.length > 4 ? Math.floor(i / 4) : i) % 2 === 
       {
         items.map((item, i) => (
           <li data-reveal="up" style={`--reveal-delay: ${(i % 4) * 0.12}s`}>
-            <a href={item.href} class="tile" style={`--tile-bg: var(--theme-tile-${tone(i)})`}>
+            <a
+              href={item.href}
+              class="tile"
+              style={`--tile-bg: var(--theme-tile-${tone(i)})`}
+              {...(isExternal(item.href) ? { target: '_blank', rel: 'noopener' } : {})}
+            >
               {item.image ? (
                 <img
                   src={item.image.src}

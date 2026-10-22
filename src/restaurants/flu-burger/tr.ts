@@ -16,6 +16,8 @@ export const tr: Content = {
     openMenu: 'Menüyü aç',
     closeMenu: 'Menüyü kapat',
     switchLanguage: 'Dil seçimi',
+    quickActions: { menu: 'Menü', call: 'Ara', directions: 'Yol tarifi', order: 'Sipariş', whatsapp: 'WhatsApp' },
+    status: { open: 'Şu an açık', closed: 'Şu an kapalı', closes: 'Kapanış', opens: 'Açılış', tomorrow: 'yarın' },
   },
   hero: {
     headline: ["Bursa'nın *en sevilen*", 'burger ve sosisli', 'durağı!'],
@@ -30,7 +32,7 @@ export const tr: Content = {
     tagline: 'Acıktın mı? Menümüze göz at.',
   },
   infoStrip: [
-    { icon: 'clock', line1: 'Her gün açık', line2: '11:00 – 23:00' },
+    { icon: 'clock', line1: 'Her gün açık', line2: '11:00 – 23:00', showStatus: true },
     { icon: 'delivery', line1: 'Paket servis', line2: 'Yemek uygulamalarında' },
     { icon: 'star', line1: 'Taze ve el yapımı', line2: 'Her gün hazırlanır' },
     { icon: 'pin', line1: 'Bursa', line2: 'Gel, burada ye' },
@@ -76,6 +78,7 @@ export const tr: Content = {
       email: 'info@example.com',
       address: 'Adres eklenecek, Bursa',
       hours: ['Her gün 11:00 – 23:00'],
+      openingHours: [{ days: ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'], open: '11:00', close: '23:00' }],
       directionsUrl: 'https://www.google.com/maps/search/?api=1&query=Bursa',
       deliveryApps: [
         { name: 'Yemeksepeti', url: '#' },

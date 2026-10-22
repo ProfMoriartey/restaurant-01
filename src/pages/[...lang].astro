@@ -8,6 +8,7 @@ import Categories from '../components/Categories.astro';
 import Order from '../components/Order.astro';
 import Franchise from '../components/Franchise.astro';
 import Contact from '../components/Contact.astro';
+import QuickBar from '../components/QuickBar.astro';
 import { settings, content } from '../site.config';
 import type { SectionId } from '../lib/types';
 
@@ -44,9 +45,10 @@ const sections = (Object.keys(settings.sections) as SectionId[]).filter(
     {
       sections.map((id) => {
         const Section = components[id];
-        return <Section content={text} />;
+        return <Section content={text} lang={lang} />;
       })
     }
   </main>
-  {settings.sections.contact && <Contact content={text} />}
+  {settings.sections.contact && <Contact content={text} lang={lang} />}
+  <QuickBar content={text} />
 </Base>

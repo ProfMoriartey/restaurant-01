@@ -16,6 +16,8 @@ export const en: Content = {
     openMenu: 'Open menu',
     closeMenu: 'Close menu',
     switchLanguage: 'Language',
+    quickActions: { menu: 'Menu', call: 'Call', directions: 'Directions', order: 'Order', whatsapp: 'WhatsApp' },
+    status: { open: 'Open now', closed: 'Closed now', closes: 'Closes', opens: 'Opens', tomorrow: 'tomorrow' },
   },
   hero: {
     headline: ["Bursa's *favourite*", 'burger & hot dog', 'spot!'],
@@ -30,7 +32,7 @@ export const en: Content = {
     tagline: 'Hungry? Take a look at our menu.',
   },
   infoStrip: [
-    { icon: 'clock', line1: 'Open every day', line2: '11:00 – 23:00' },
+    { icon: 'clock', line1: 'Open every day', line2: '11:00 – 23:00', showStatus: true },
     { icon: 'delivery', line1: 'Delivery', line2: 'On food delivery apps' },
     { icon: 'star', line1: 'Fresh and handmade', line2: 'Made every day' },
     { icon: 'pin', line1: 'Bursa', line2: 'Come eat with us' },
@@ -76,6 +78,7 @@ export const en: Content = {
       email: 'info@example.com',
       address: 'Address to be added, Bursa',
       hours: ['Every day 11:00 – 23:00'],
+      openingHours: [{ days: ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'], open: '11:00', close: '23:00' }],
       directionsUrl: 'https://www.google.com/maps/search/?api=1&query=Bursa',
       deliveryApps: [
         { name: 'Yemeksepeti', url: '#' },

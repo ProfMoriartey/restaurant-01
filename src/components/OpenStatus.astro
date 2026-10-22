@@ -1,0 +1,38 @@
+---
+// "Open now · Closes 23:00" badge. Worked out in the browser from the location's opening
+// hours in the restaurant's time zone, so it stays right on a static site; hidden without scripts.
+import { settings } from '../site.config';
+import type { Content, Location } from '../lib/types';
+
+interface Props {
+  location: Location;
+  lang: string;
+  labels: Content['ui']['status'];
+  /** Only "Open now" / "Closed now", for narrow spots. */
+  compact?: boolean;
+  class?: string;
+}
+
+const { location, lang, labels, compact, class: className } = Astro.props;
+---
+
+{
+  location.openingHours.length > 0 && (
+    <span
+      class:list={[
+        'inline-flex items-center gap-2 rounded-full bg-current/10 px-3 py-1 font-small text-xs font-semibold',
+        className,
+      ]}
+      data-open-status
+      data-hours={JSON.stringify(location.openingHours)}
+      data-tz={settings.timeZone}
+      data-lang={lang}
+      data-labels={JSON.stringify(labels)}
+      data-compact={compact ? '' : undefined}
+      hidden
+    >
+      <span class="size-2 shrink-0 rounded-full bg-current" data-status-dot />
+      <span data-status-text />
+    </span>
+  )
+}

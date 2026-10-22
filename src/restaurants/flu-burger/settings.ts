@@ -24,4 +24,8 @@ export const settings: Settings = {
     { platform: 'tiktok', url: '#' },
     { platform: 'whatsapp', url: '#' },
   ],
+  timeZone: 'Europe/Istanbul',
+  // Placeholder until the restaurant's menu website link arrives.
+  menuUrl: '#categories',
+  quickActions: ['menu', 'call', 'directions', 'order'],
 };

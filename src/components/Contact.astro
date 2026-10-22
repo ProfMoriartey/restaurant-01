@@ -1,13 +1,16 @@
 ---
 import Icon from './Icon.astro';
+import OpenStatus from './OpenStatus.astro';
 import { settings } from '../site.config';
 import type { Content, SocialPlatform } from '../lib/types';
 
 interface Props {
   content: Content;
+  lang: string;
 }
 
-const { contact, locations } = Astro.props.content;
+const { content, lang } = Astro.props;
+const { contact, locations, ui } = content;
 const { mapEmbedUrl } = settings;
 const directionsUrl = locations.find((l) => l.directionsUrl)?.directionsUrl;
 
@@ -100,6 +103,7 @@ const platformNames: Record<SocialPlatform, string> = {
                     {location.hours.map((line) => (
                       <span class="block">{line}</span>
                     ))}
+                    <OpenStatus location={location} lang={lang} labels={ui.status} class="mt-2" />
                   </dd>
                 </div>
               </dl>

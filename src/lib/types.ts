@@ -16,6 +16,10 @@ export type IconName = 'clock' | 'delivery' | 'star' | 'pin' | 'phone' | 'mail' 
 
 export type SocialPlatform = 'instagram' | 'facebook' | 'tiktok' | 'x' | 'youtube' | 'whatsapp';
 
+export type QuickAction = 'menu' | 'call' | 'directions' | 'order' | 'whatsapp';
+
+export type Weekday = 'mon' | 'tue' | 'wed' | 'thu' | 'fri' | 'sat' | 'sun';
+
 /** Drawn stand-ins used until real photos arrive. */
 export type FoodArt = 'burger' | 'hotdog' | 'fries' | 'drink';
 
@@ -41,6 +45,14 @@ export interface Settings {
   /** Where the franchise form posts, e.g. a Formspree endpoint. */
   franchiseFormAction?: string;
   social: { platform: SocialPlatform; url: string }[];
+  /** IANA time zone the opening hours are in, e.g. 'Europe/Istanbul'. */
+  timeZone: string;
+  /** The full menu, e.g. a separate menu website. */
+  menuUrl?: string;
+  /** WhatsApp number in international format without +, e.g. '902240000000'. */
+  whatsapp?: string;
+  /** Buttons in the bar fixed to the bottom of phone and tablet screens, in order. Empty hides it. */
+  quickActions: QuickAction[];
 }
 
 export interface Location {
@@ -48,7 +60,10 @@ export interface Location {
   phone: string;
   email: string;
   address: string;
+  /** Opening hours as people read them. */
   hours: string[];
+  /** The same hours for the open / closed badge. A close time before the open time runs past midnight. */
+  openingHours: { days: Weekday[]; open: string; close: string }[];
   /** Link for this location's menu button in the menu card. */
   menuLink?: string;
   /** Opens directions in a maps app. */
@@ -62,7 +77,14 @@ export interface Content {
   meta: { title: string; description: string };
   /** Header link labels. Sections without a label stay out of the menu. */
   nav: Partial<Record<SectionId, string>>;
-  ui: { openMenu: string; closeMenu: string; switchLanguage: string };
+  ui: {
+    openMenu: string;
+    closeMenu: string;
+    switchLanguage: string;
+    quickActions: Record<QuickAction, string>;
+    /** Open / closed badge, e.g. "Open now · Closes 23:00". */
+    status: { open: string; closed: string; closes: string; opens: string; tomorrow: string };
+  };
   hero: {
     /** One string per line; wrap a word in *asterisks* to highlight it. */
     headline: string[];
@@ -75,7 +97,8 @@ export interface Content {
     tagline: string;
     image?: Image;
   };
-  infoStrip: { icon: IconName; line1: string; line2: string }[];
+  /** Set showStatus on the opening-hours item to add the open / closed badge. */
+  infoStrip: { icon: IconName; line1: string; line2: string; showStatus?: boolean }[];
   categories: {
     title: string;
     items: {

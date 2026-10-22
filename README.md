@@ -37,6 +37,15 @@ Each one is switched on or off in the restaurant's `settings.ts`. They show in t
 | `franchise` | Enquiry form; set `franchiseFormAction` to a form service endpoint |
 | `contact` | Social links, each location's phone, email, address and hours, and a map when `mapEmbedUrl` is set |
 
+## Other settings
+
+| Setting | What it does |
+| --- | --- |
+| `quickActions` | Buttons in the bar fixed to the bottom of phone and tablet screens: `menu`, `call`, `directions`, `order`, `whatsapp`. Empty hides the bar. |
+| `menuUrl` | Where the Menu button goes, e.g. a separate menu website. Each category tile has its own `href` in the text files. Links to other websites open in a new tab. |
+| `timeZone` | Time zone of the opening hours, e.g. `Europe/Istanbul`. |
+| `openingHours` (per location) | Days and times behind the "Open now / Closed" badge. A close time before the open time runs past midnight. |
+
 ## Add a restaurant
 
 1. Copy `src/restaurants/flu-burger` to a new folder and edit its settings and text.

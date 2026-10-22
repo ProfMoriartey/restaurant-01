@@ -1,0 +1,56 @@
+---
+// Buttons fixed to the bottom of phone and tablet screens for the things visitors come to do.
+import Icon from './Icon.astro';
+import { settings } from '../site.config';
+import { isExternal } from '../lib/nav';
+import type { Content, IconName, QuickAction, SocialPlatform } from '../lib/types';
+
+interface Props {
+  content: Content;
+}
+
+const { content } = Astro.props;
+const location = content.locations[0];
+
+const targets: Record<QuickAction, { href?: string; icon: IconName | SocialPlatform }> = {
+  menu: { href: settings.menuUrl ?? (settings.sections.categories ? '#categories' : undefined), icon: 'cutlery' },
+  call: { href: location && `tel:${location.phone.replace(/\s/g, '')}`, icon: 'phone' },
+  directions: { href: location?.directionsUrl, icon: 'pin' },
+  order: {
+    href: settings.sections.order ? '#order' : location?.deliveryApps[0]?.url,
+    icon: 'delivery',
+  },
+  whatsapp: { href: settings.whatsapp && `https://wa.me/${settings.whatsapp}`, icon: 'whatsapp' },
+};
+
+const actions = settings.quickActions
+  .map((id) => ({ id, label: content.ui.quickActions[id], ...targets[id] }))
+  .filter((action) => action.href);
+---
+
+{
+  actions.length > 0 && (
+    <>
+      <div class="h-[calc(4.25rem+env(safe-area-inset-bottom))] lg:hidden" aria-hidden="true" />
+      <nav
+        aria-label={settings.name}
+        class="fixed inset-x-0 bottom-0 z-30 border-t-3 border-accent bg-panel pb-[env(safe-area-inset-bottom)] text-panel-ink lg:hidden"
+      >
+        <ul class="mx-auto grid max-w-xl" style={`grid-template-columns: repeat(${actions.length}, minmax(0, 1fr))`}>
+          {actions.map((action) => (
+            <li>
+              <a
+                href={action.href}
+                class="flex h-16 flex-col items-center justify-center gap-1 font-display text-xs font-bold uppercase transition-colors duration-300 hover:text-accent"
+                {...(isExternal(action.href!) ? { target: '_blank', rel: 'noopener' } : {})}
+              >
+                <Icon name={action.icon} class="size-6 text-accent" />
+                {action.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </>
+  )
+}

@@ -18,3 +18,8 @@ export function highlightParts(line: string) {
         : { text: part, highlight: false },
     );
 }
+
+/** Links to another website open in a new tab. */
+export function isExternal(href: string) {
+  return /^https?:\/\//.test(href);
+}

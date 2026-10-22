@@ -1,12 +1,15 @@
 ---
 import Icon from './Icon.astro';
+import OpenStatus from './OpenStatus.astro';
 import type { Content } from '../lib/types';
 
 interface Props {
   content: Content;
+  lang: string;
 }
 
-const { infoStrip } = Astro.props.content;
+const { content, lang } = Astro.props;
+const { infoStrip, locations, ui } = content;
 ---
 
 <section id="infoStrip" class="bg-(--theme-info-bg) [background-image:var(--theme-info-image)] text-(--theme-info-ink)">
@@ -18,6 +21,9 @@ const { infoStrip } = Astro.props.content;
           <p class="font-small text-sm leading-snug">
             <strong class="block font-display text-base font-extrabold uppercase">{item.line1}</strong>
             {item.line2}
+            {item.showStatus && locations[0] && (
+              <OpenStatus location={locations[0]} lang={lang} labels={ui.status} compact class="mt-2" />
+            )}
           </p>
         </li>
       ))

@@ -92,3 +92,77 @@ if (rotators.length) {
   rotateQuery.addEventListener('change', queueRotation);
   updateRotation();
 }
+
+// Open / closed badges. Times are read in the restaurant's time zone, whatever the visitor's.
+const DAYS = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+const WEEK = 7 * 1440;
+
+const toMinutes = (time: string) => {
+  const [h, m] = time.split(':').map(Number);
+  return h * 60 + m;
+};
+const toTime = (minutes: number) => {
+  const m = ((minutes % 1440) + 1440) % 1440;
+  return `${String(Math.floor(m / 60)).padStart(2, '0')}:${String(m % 60).padStart(2, '0')}`;
+};
+
+/** Minutes since Monday 00:00 in the given time zone. */
+function weekMinute(timeZone: string) {
+  const parts = new Intl.DateTimeFormat('en-US', {
+    timeZone,
+    weekday: 'short',
+    hour: '2-digit',
+    minute: '2-digit',
+    hourCycle: 'h23',
+  }).formatToParts(new Date());
+  const get = (type: string) => parts.find((p) => p.type === type)!.value;
+  const day = DAYS.indexOf(get('weekday').slice(0, 3).toLowerCase());
+  return day * 1440 + Number(get('hour')) * 60 + Number(get('minute'));
+}
+
+function updateOpenStatus() {
+  document.querySelectorAll<HTMLElement>('[data-open-status]').forEach((badge) => {
+    const hours: { days: string[]; open: string; close: string }[] = JSON.parse(badge.dataset.hours!);
+    const labels = JSON.parse(badge.dataset.labels!);
+    const now = weekMinute(badge.dataset.tz!);
+
+    // Each opening as a [start, end) span of the week; a close before the open runs past midnight.
+    const spans = hours.flatMap(({ days, open, close }) =>
+      days.map((day) => {
+        const start = DAYS.indexOf(day) * 1440 + toMinutes(open);
+        let end = DAYS.indexOf(day) * 1440 + toMinutes(close);
+        if (end <= start) end += 1440;
+        return [start, end];
+      }),
+    );
+
+    // Check this week and the spans that spill over from last Sunday night.
+    const current = spans.find(([start, end]) => (now >= start && now < end) || (now + WEEK >= start && now + WEEK < end));
+    let text: string;
+    if (current) {
+      text = `${labels.open} · ${labels.closes} ${toTime(current[1])}`;
+    } else {
+      const next = Math.min(...spans.map(([start]) => (start > now ? start : start + WEEK)));
+      const daysAhead = Math.floor(next / 1440) - Math.floor(now / 1440);
+      let when = '';
+      if (daysAhead === 1) when = `${labels.tomorrow} `;
+      else if (daysAhead > 1) {
+        // 2024-01-01 was a Monday.
+        const date = new Date(Date.UTC(2024, 0, 1 + (Math.floor(next / 1440) % 7)));
+        when = `${date.toLocaleDateString(badge.dataset.lang, { weekday: 'long', timeZone: 'UTC' })} `;
+      }
+      text = `${labels.closed} · ${labels.opens} ${when}${toTime(next)}`;
+    }
+
+    if (badge.dataset.compact !== undefined) text = current ? labels.open : labels.closed;
+    badge.querySelector('[data-status-text]')!.textContent = text;
+    badge.querySelector<HTMLElement>('[data-status-dot]')!.style.color = current ? '#2fbf71' : '';
+    badge.dataset.state = current ? 'open' : 'closed';
+    badge.hidden = false;
+  });
+}
+
+if (document.querySelector('[data-open-status]')) {
+  updateOpenStatus();
+  setInterval(updateOpenStatus, 60_000);
+}
