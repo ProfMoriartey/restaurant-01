@@ -48,18 +48,21 @@ const overlay = page === 'home' && settings.sections.hero;
       </ul>
     </nav>
 
-    <button
-      type="button"
-      class="-mr-1.5 grid size-11 place-items-center lg:hidden"
-      aria-expanded="false"
-      aria-controls="mobile-menu"
-      data-menu-toggle
-    >
-      <span class="sr-only">{content.ui.openMenu}</span>
-      <svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" />
-      </svg>
-    </button>
+    <div class="flex items-center gap-1 lg:hidden">
+      <LanguageSwitcher lang={lang} page={page} class="text-sm [&_a]:inline-block [&_a]:px-2 [&_a]:py-3" />
+      <button
+        type="button"
+        class="-mr-1.5 grid size-11 place-items-center"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        data-menu-toggle
+      >
+        <span class="sr-only">{content.ui.openMenu}</span>
+        <svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" />
+        </svg>
+      </button>
+    </div>
   </div>
 </header>
 {!overlay && <div class="h-16 lg:hidden" aria-hidden="true" />}
@@ -89,5 +92,4 @@ const overlay = page === 'home' && settings.sections.hero;
       }
     </ul>
   </nav>
-  <LanguageSwitcher lang={lang} page={page} class="mt-auto text-xl" />
 </div>
