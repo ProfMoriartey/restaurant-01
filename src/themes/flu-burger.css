@@ -1,0 +1,28 @@
+/* Flu Burger: clean red, black and white, taken from the logo. */
+[data-theme='flu-burger'] {
+  --theme-page: #ffffff;
+  --theme-ink: #1e1d1e;
+  --theme-accent: #ff2a00;
+
+  --theme-header-bg: #ffffff;
+  --theme-header-ink: #1e1d1e;
+  --theme-nav-hover: #ff2a00;
+
+  --theme-hero-bg: #1e1d1e;
+  --theme-hero-ink: #ffffff;
+
+  --theme-panel-bg: #1e1d1e;
+  --theme-panel-ink: #ffffff;
+
+  --theme-font-display: 'Outfit Variable', system-ui, sans-serif;
+  --theme-font-body: 'Inter Variable', system-ui, sans-serif;
+  --theme-font-small: 'Inter Variable', system-ui, sans-serif;
+  --theme-nav-weight: 700;
+  --theme-headline-weight: 800;
+  --theme-headline-tracking: -0.01em;
+
+  /* Hard offset shadow for section titles. */
+  --theme-title-shadow: 4px 4px 0 #ff2a00;
+
+  --theme-texture: none;
+}

@@ -1,0 +1,86 @@
+---
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import { settings } from '../site.config';
+import { navLinks } from '../lib/nav';
+import type { Content } from '../lib/types';
+
+interface Props {
+  lang: string;
+  content: Content;
+}
+
+const { lang, content } = Astro.props;
+const links = navLinks(settings, content);
+const home = getRelativeLocaleUrl(lang);
+---
+
+<header class="bg-header text-header-ink">
+  <div class="relative mx-auto flex h-24 max-w-site items-center justify-center px-4 lg:h-40 lg:justify-between lg:px-6">
+    <a href={home} class="block shrink-0">
+      <img
+        src={settings.logo.src}
+        alt={settings.name}
+        width={settings.logo.width}
+        height={settings.logo.height}
+        class="size-20 lg:size-[125px]"
+      />
+    </a>
+
+    <nav aria-label={settings.name} class="hidden lg:block">
+      <ul class="flex items-center gap-9 text-[17px]">
+        {
+          links.map((link) => (
+            <li>
+              <a href={`#${link.id}`} class="nav-link" data-nav-link>
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+        <li><LanguageSwitcher lang={lang} class="text-[17px]" /></li>
+      </ul>
+    </nav>
+
+    <button
+      type="button"
+      class="absolute right-4 grid size-11 place-items-center lg:hidden"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+      data-menu-toggle
+    >
+      <span class="sr-only">{content.ui.openMenu}</span>
+      <svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" />
+      </svg>
+    </button>
+  </div>
+
+  <div class="mobile-backdrop fixed inset-0 z-40 bg-black/50 lg:hidden" data-menu-close aria-hidden="true"></div>
+  <div
+    id="mobile-menu"
+    class="mobile-panel fixed inset-y-0 right-0 z-50 flex w-[70%] max-w-80 min-w-[17rem] flex-col bg-panel px-8 pt-6 pb-10 text-panel-ink lg:hidden"
+    data-menu-panel
+  >
+    <button type="button" class="ml-auto grid size-11 place-items-center" data-menu-close>
+      <span class="sr-only">{content.ui.closeMenu}</span>
+      <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M5 5l14 14M19 5L5 19" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" />
+      </svg>
+    </button>
+    <nav aria-label={settings.name} class="mt-6">
+      <ul class="flex flex-col gap-6 text-xl">
+        {
+          links.map((link) => (
+            <li>
+              <a href={`#${link.id}`} class="nav-link" data-nav-link>
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+    <LanguageSwitcher lang={lang} class="mt-auto text-xl" />
+  </div>
+</header>

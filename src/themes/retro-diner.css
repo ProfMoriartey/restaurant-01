@@ -1,0 +1,36 @@
+/* Retro diner: warm burgundy, brick, mustard and slate with a slab serif.
+   Saved for restaurants that want the reference site's printed-paper look. */
+[data-theme='retro-diner'] {
+  --theme-page: #f3ebe3;
+  --theme-ink: #384951;
+  --theme-accent: #ec3737;
+
+  --theme-header-bg: #560006;
+  --theme-header-ink: #f9e4a7;
+  --theme-nav-hover: #ee0808;
+
+  --theme-hero-bg: #560006;
+  --theme-hero-ink: #f9e4a7;
+
+  --theme-panel-bg: #560006;
+  --theme-panel-ink: #f9e4a7;
+
+  /* Kept for the sections still to come. */
+  --theme-brick: #902a2a;
+  --theme-mustard: #e8aa0c;
+  --theme-mustard-textured: #e9b04a;
+  --theme-slate: #334a52;
+  --theme-cream: #f9e4a7;
+
+  --theme-font-display: 'Roboto Slab', Georgia, serif;
+  --theme-font-body: 'Roboto Slab', Georgia, serif;
+  --theme-font-small: 'Be Vietnam Pro', system-ui, sans-serif;
+  --theme-nav-weight: 800;
+  --theme-headline-weight: 600;
+  --theme-headline-tracking: 0;
+
+  --theme-title-shadow: 4px 4px 0 rgb(0 0 0 / 0.35);
+
+  /* Paper grain for mustard sections. */
+  --theme-texture: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .12 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}

@@ -1,0 +1,25 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import { settings, content } from '../site.config';
+
+// One page per language: the default at `/`, the others at `/<code>`.
+export function getStaticPaths() {
+  return settings.languages.map((code) => ({
+    params: { lang: code === settings.defaultLanguage ? undefined : code },
+    props: { lang: code },
+  }));
+}
+
+const { lang } = Astro.props;
+const text = content[lang];
+const { sections } = settings;
+---
+
+<Base lang={lang} content={text}>
+  <Header lang={lang} content={text} />
+  <main>
+    {sections.hero && <Hero content={text} />}
+  </main>
+</Base>

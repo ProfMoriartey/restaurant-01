@@ -1,0 +1,54 @@
+---
+import BurgerArt from './placeholders/BurgerArt.astro';
+import { highlightParts } from '../lib/nav';
+import type { Content } from '../lib/types';
+
+interface Props {
+  content: Content;
+}
+
+const { hero } = Astro.props.content;
+---
+
+<section id="hero" class="overflow-hidden bg-hero text-hero-ink">
+  <div class="mx-auto grid max-w-site items-center gap-10 px-4 py-14 sm:py-20 lg:grid-cols-2 lg:gap-16 lg:px-6 lg:py-24">
+    <div>
+      <h1 class="headline text-[2.25rem] leading-[1.05] sm:text-5xl lg:text-[3.5rem]" data-reveal="left">
+        {
+          hero.headline.map((line) => (
+            <span class="block">
+              {highlightParts(line).map((part) =>
+                part.highlight ? <em class="text-accent not-italic">{part.text}</em> : part.text,
+              )}
+            </span>
+          ))
+        }
+      </h1>
+      <div class="mt-8 max-w-xl space-y-4 text-[15px] leading-relaxed opacity-90 sm:text-base">
+        {
+          hero.paragraphs.map((p, i) => (
+            <p data-reveal="up" style={`--reveal-delay: ${0.2 + i * 0.15}s`}>
+              {p}
+            </p>
+          ))
+        }
+      </div>
+    </div>
+
+    <div class="mx-auto w-full max-w-md lg:max-w-none" data-reveal="right" style="--reveal-delay: 0.15s">
+      {
+        hero.image ? (
+          <img
+            src={hero.image.src}
+            alt={hero.image.alt}
+            width={hero.image.width}
+            height={hero.image.height}
+            class="h-auto w-full"
+          />
+        ) : (
+          <BurgerArt class="h-auto w-full" />
+        )
+      }
+    </div>
+  </div>
+</section>

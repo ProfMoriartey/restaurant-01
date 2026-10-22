@@ -1,0 +1,153 @@
+@import 'tailwindcss';
+@import '../themes/flu-burger.css';
+@import '../themes/retro-diner.css';
+
+/* Tailwind names for the active theme's values, e.g. bg-hero, text-accent, font-display. */
+@theme inline {
+  --color-page: var(--theme-page);
+  --color-ink: var(--theme-ink);
+  --color-accent: var(--theme-accent);
+  --color-header: var(--theme-header-bg);
+  --color-header-ink: var(--theme-header-ink);
+  --color-nav-hover: var(--theme-nav-hover);
+  --color-hero: var(--theme-hero-bg);
+  --color-hero-ink: var(--theme-hero-ink);
+  --color-panel: var(--theme-panel-bg);
+  --color-panel-ink: var(--theme-panel-ink);
+
+  --font-display: var(--theme-font-display);
+  --font-body: var(--theme-font-body);
+  --font-small: var(--theme-font-small);
+
+  --container-site: 79.375rem;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--theme-page);
+    color: var(--theme-ink);
+    font-family: var(--theme-font-body);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--theme-accent);
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+@layer components {
+  .headline {
+    font-family: var(--theme-font-display);
+    font-weight: var(--theme-headline-weight);
+    letter-spacing: var(--theme-headline-tracking);
+  }
+
+  .section-title {
+    font-family: var(--theme-font-display);
+    font-weight: 900;
+    text-transform: uppercase;
+    text-shadow: var(--theme-title-shadow);
+  }
+
+  .nav-link {
+    position: relative;
+    font-family: var(--theme-font-display);
+    font-weight: var(--theme-nav-weight);
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -6px;
+    height: 2px;
+    background: var(--theme-accent);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+  }
+
+  .nav-link:hover {
+    color: var(--theme-nav-hover);
+  }
+
+  .nav-link[aria-current='true']::after {
+    transform: scaleX(1);
+  }
+}
+
+/* Entrance animations: blocks fade in while sliding, once, as they scroll into view.
+   Hidden only when scripts run, so the page still reads without them. */
+.js [data-reveal] {
+  opacity: 0;
+  transition:
+    opacity 1.25s ease-out,
+    transform 1.25s ease-out;
+  transition-delay: var(--reveal-delay, 0s);
+}
+
+.js [data-reveal='up'] {
+  transform: translateY(48px);
+}
+
+.js [data-reveal='left'] {
+  transform: translateX(-72px);
+}
+
+.js [data-reveal='right'] {
+  transform: translateX(72px);
+}
+
+.js [data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* Phone menu: a panel that slides in from the side. */
+.mobile-panel {
+  transform: translateX(100%);
+  transition: transform 0.5s ease;
+}
+
+.mobile-backdrop {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+[data-menu='open'] .mobile-panel {
+  transform: none;
+}
+
+[data-menu='open'] .mobile-backdrop {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobile-panel,
+  .mobile-backdrop {
+    transition: none;
+  }
+}

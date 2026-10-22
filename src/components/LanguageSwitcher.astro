@@ -1,0 +1,33 @@
+---
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { settings, content } from '../site.config';
+
+interface Props {
+  lang: string;
+  class?: string;
+}
+
+const { lang, class: className } = Astro.props;
+---
+
+{
+  settings.languages.length > 1 && (
+    <ul class:list={['flex items-center gap-1', className]} aria-label={content[lang].ui.switchLanguage}>
+      {settings.languages.map((code, i) => (
+        <li class="flex items-center gap-1">
+          {i > 0 && <span aria-hidden="true" class="opacity-40">/</span>}
+          <a
+            href={getRelativeLocaleUrl(code)}
+            hreflang={code}
+            lang={code}
+            aria-label={content[code].languageName}
+            aria-current={code === lang ? 'true' : undefined}
+            class="nav-link px-1 aria-[current=true]:text-accent"
+          >
+            {code}
+          </a>
+        </li>
+      ))}
+    </ul>
+  )
+}
