@@ -6,6 +6,8 @@ export const en: Content = {
   meta: {
     title: 'Flu Burger | Bursa',
     description: 'Burgers and hot dogs in Bursa. Menu, ordering and contact details.',
+    locale: 'en_US',
+    shareImage: { src: '/restaurants/flu-burger/share-en.png', alt: 'Flu Burger: burgers and hot dogs in Bursa', width: 1200, height: 630 },
   },
   nav: {
     categories: 'Menu',
@@ -77,6 +79,8 @@ export const en: Content = {
       phone: '+90 224 000 00 00',
       email: 'info@example.com',
       address: 'Address to be added, Bursa',
+      // Street, district and postal code to be added with the real address.
+      postalAddress: { city: 'Bursa', country: 'TR' },
       hours: ['Every day 11:00 – 23:00'],
       openingHours: [{ days: ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'], open: '11:00', close: '23:00' }],
       directionsUrl: 'https://www.google.com/maps/search/?api=1&query=Bursa',

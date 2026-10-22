@@ -38,6 +38,12 @@ export interface Settings {
   /** Served at `/`; the others under `/<code>`. */
   defaultLanguage: string;
   logo: { src: string; width: number; height: number };
+  /** Browser tab icon (32px PNG) and phone home-screen icon (180px PNG). */
+  icons: { favicon: string; appleTouch: string };
+  /** The live address, e.g. 'https://fluburger.com'. On Vercel it defaults to the project's production domain. */
+  siteUrl?: string;
+  /** For Google's business details. */
+  seo: { cuisine: string[]; priceRange?: string };
   /** Which sections show, in page order. */
   sections: Record<SectionId, boolean>;
   /** Google Maps embed URL shown in the contact footer. Leave out to hide the map. */
@@ -60,6 +66,9 @@ export interface Location {
   phone: string;
   email: string;
   address: string;
+  /** The address in parts, for Google's business details. */
+  postalAddress: { street?: string; district?: string; city: string; postalCode?: string; country: string };
+  geo?: { lat: number; lng: number };
   /** Opening hours as people read them. */
   hours: string[];
   /** The same hours for the open / closed badge. A close time before the open time runs past midnight. */
@@ -74,7 +83,8 @@ export interface Location {
 export interface Content {
   /** The language's own name, shown in the switcher's accessible label. */
   languageName: string;
-  meta: { title: string; description: string };
+  /** Page title, description and the image shown when the link is shared (1200 × 630). */
+  meta: { title: string; description: string; locale: string; shareImage: Image };
   /** Header link labels. Sections without a label stay out of the menu. */
   nav: Partial<Record<SectionId, string>>;
   ui: {

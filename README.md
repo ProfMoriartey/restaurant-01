@@ -45,6 +45,9 @@ Each one is switched on or off in the restaurant's `settings.ts`. They show in t
 | `menuUrl` | Where the Menu button goes, e.g. a separate menu website. Each category tile has its own `href` in the text files. Links to other websites open in a new tab. |
 | `timeZone` | Time zone of the opening hours, e.g. `Europe/Istanbul`. |
 | `openingHours` (per location) | Days and times behind the "Open now / Closed" badge. A close time before the open time runs past midnight. |
+| `siteUrl` | The live address, e.g. `https://fluburger.com`. Until it is set, Vercel's production address is used (Vercel exposes it during the build). Needed for the sitemap, canonical and language links, and full link-preview addresses. |
+| `seo`, `postalAddress` (per location) | Cuisine, price range and the address in parts, for the business details Google reads. |
+| `meta.shareImage` (per language) | The 1200 × 630 image shown when the link is shared on WhatsApp, Instagram or Facebook. |
 
 ## Add a restaurant
 

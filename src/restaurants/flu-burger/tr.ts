@@ -6,6 +6,8 @@ export const tr: Content = {
   meta: {
     title: 'Flu Burger | Bursa',
     description: "Bursa'da burger ve sosisli. Menü, sipariş ve iletişim bilgileri.",
+    locale: 'tr_TR',
+    shareImage: { src: '/restaurants/flu-burger/share-tr.png', alt: 'Flu Burger: Bursa\'nın burger ve sosisli durağı', width: 1200, height: 630 },
   },
   nav: {
     categories: 'Menü',
@@ -77,6 +79,8 @@ export const tr: Content = {
       phone: '+90 224 000 00 00',
       email: 'info@example.com',
       address: 'Adres eklenecek, Bursa',
+      // Street, district and postal code to be added with the real address.
+      postalAddress: { city: 'Bursa', country: 'TR' },
       hours: ['Her gün 11:00 – 23:00'],
       openingHours: [{ days: ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'], open: '11:00', close: '23:00' }],
       directionsUrl: 'https://www.google.com/maps/search/?api=1&query=Bursa',
