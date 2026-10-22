@@ -10,9 +10,11 @@ interface Props {
   lang: string;
   /** Prefix for links to home page sections; empty on the home page itself. */
   base?: string;
+  /** Keep the bar out of the first view; it slides up once the visitor scrolls. */
+  revealOnScroll?: boolean;
 }
 
-const { content, lang, base = '' } = Astro.props;
+const { content, lang, base = '', revealOnScroll = false } = Astro.props;
 const location = content.locations[0];
 
 const targets: Record<QuickAction, { href?: string; icon: IconName | SocialPlatform }> = {
@@ -38,7 +40,9 @@ const actions = settings.quickActions
       <div class="h-[calc(4.25rem+env(safe-area-inset-bottom))] lg:hidden" aria-hidden="true" />
       <nav
         aria-label={settings.name}
-        class="fixed inset-x-0 bottom-0 z-30 border-t-3 border-accent bg-panel pb-[env(safe-area-inset-bottom)] text-panel-ink lg:hidden"
+        data-quick-bar
+        data-reveal-on-scroll={revealOnScroll ? '' : undefined}
+        class="quick-bar fixed inset-x-0 bottom-0 z-30 border-t-3 border-accent bg-panel pb-[env(safe-area-inset-bottom)] text-panel-ink lg:hidden"
       >
         <ul class="mx-auto grid max-w-xl" style={`grid-template-columns: repeat(${actions.length}, minmax(0, 1fr))`}>
           {actions.map((action) => (

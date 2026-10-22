@@ -203,3 +203,30 @@ document.querySelectorAll<HTMLElement>('[data-map]').forEach((box) => {
     loadMap(box);
   });
 });
+
+// Phones and tablets: hide the header while scrolling down, bring it back when scrolling up,
+// and slide the quick-action bar in once the visitor has scrolled past the first view.
+const header = document.querySelector<HTMLElement>('.site-header');
+const quickBar = document.querySelector<HTMLElement>('[data-quick-bar]');
+const smallScreen = window.matchMedia('(max-width: 63.999rem)');
+let lastY = window.scrollY;
+let scrollFrame = 0;
+
+function updateOnScroll() {
+  scrollFrame = 0;
+  const y = window.scrollY;
+  if (header) {
+    if (!smallScreen.matches || y < 8) header.dataset.header = 'top';
+    else if (root.dataset.menu === 'open') header.dataset.header = 'shown';
+    else if (y > lastY + 4 && y > header.offsetHeight) header.dataset.header = 'hidden';
+    else if (y < lastY - 4) header.dataset.header = 'shown';
+  }
+  quickBar?.classList.toggle('is-shown', y > window.innerHeight * 0.35);
+  lastY = y;
+}
+
+window.addEventListener('scroll', () => {
+  if (!scrollFrame) scrollFrame = requestAnimationFrame(updateOnScroll);
+}, { passive: true });
+smallScreen.addEventListener('change', updateOnScroll);
+updateOnScroll();

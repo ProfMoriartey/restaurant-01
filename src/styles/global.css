@@ -207,6 +207,59 @@
   }
 }
 
+/* Header. On phones and tablets it is slim and fixed: over the hero it starts transparent,
+   it slides away while scrolling down and comes back, solid, when scrolling up. */
+.site-header {
+  background-color: var(--theme-header-bg);
+  color: var(--theme-header-ink);
+}
+
+@media (max-width: 63.999rem) {
+  .site-header {
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 35;
+    transition:
+      transform 0.35s ease,
+      background-color 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+
+  .site-header[data-overlay][data-header='top'] {
+    background-color: transparent;
+    color: var(--theme-hero-ink);
+  }
+
+  .site-header[data-overlay]:not([data-header='top']) {
+    background-color: var(--theme-panel-bg);
+    color: var(--theme-panel-ink);
+  }
+
+  .site-header[data-header='shown'] {
+    box-shadow: 0 6px 20px rgb(0 0 0 / 0.2);
+  }
+
+  .site-header[data-header='hidden'] {
+    transform: translateY(-100%);
+  }
+
+  /* The quick-action bar waits below the screen until the visitor scrolls past the first view. */
+  .quick-bar {
+    transition: transform 0.35s ease;
+  }
+
+  .js .quick-bar[data-reveal-on-scroll]:not(.is-shown) {
+    transform: translateY(100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-header,
+  .quick-bar {
+    transition: none;
+  }
+}
+
 /* Phone menu: a panel that slides in from the side. */
 .mobile-panel {
   transform: translateX(100%);
