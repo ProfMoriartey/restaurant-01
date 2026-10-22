@@ -36,7 +36,7 @@ export interface Settings {
   logo: { src: string; width: number; height: number };
   /** Which sections show, in page order. */
   sections: Record<SectionId, boolean>;
-  /** Google Maps embed URL for the "come eat here" panel. Leave out to hide the panel. */
+  /** Google Maps embed URL shown in the contact footer. Leave out to hide the map. */
   mapEmbedUrl?: string;
   /** Where the franchise form posts, e.g. a Formspree endpoint. */
   franchiseFormAction?: string;
@@ -90,12 +90,10 @@ export interface Content {
     title: string;
     /** Shown when no delivery apps are listed. */
     noApps: string;
-  };
-  visit: {
-    title: string;
-    text: string;
-    directions: string;
-    mapTitle: string;
+    /** Curved text around the plate. */
+    badge: string;
+    /** Overhead dish photo, cropped to a circle. Without one, a drawn plate shows. */
+    image?: Image;
   };
   franchise: {
     title: string;
@@ -114,6 +112,8 @@ export interface Content {
     title: string;
     subtitle: string;
     labels: { phone: string; email: string; address: string; hours: string };
+    directions: string;
+    mapTitle: string;
     rights: string;
   };
   locations: Location[];

@@ -53,13 +53,6 @@
   --theme-order-bg: #902a2a;
   --theme-order-ink: #f9e4a7;
   --theme-order-shadow: rgb(0 0 0 / 0.35);
-  --theme-visit-bg: #334a52;
-  --theme-visit-ink: #f9e4a7;
-  --theme-visit-shadow: rgb(0 0 0 / 0.35);
-  --theme-visit-button-bg: #f9e4a7;
-  --theme-visit-button-ink: #334a52;
-  --theme-visit-button-hover-bg: #902a2a;
-  --theme-visit-button-hover-ink: #f9e4a7;
 
   --theme-button-bg: #334a52;
   --theme-button-ink: #f9e4a7;
@@ -78,6 +71,10 @@
   --theme-footer-ink: #384951;
   --theme-footer-shadow: #902a2a;
   --theme-footer-icon: #902a2a;
+  --theme-footer-button-bg: #334a52;
+  --theme-footer-button-ink: #f9e4a7;
+  --theme-footer-button-hover-bg: #902a2a;
+  --theme-footer-button-hover-ink: #f9e4a7;
 
   /* Fine vertical stripes for slate sections, diagonal stripes inside tiles. */
   --theme-stripes: repeating-linear-gradient(90deg, rgb(255 255 255 / 0.04) 0 2px, transparent 2px 9px);

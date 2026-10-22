@@ -8,6 +8,8 @@ interface Props {
 }
 
 const { contact, locations } = Astro.props.content;
+const { mapEmbedUrl } = settings;
+const directionsUrl = locations.find((l) => l.directionsUrl)?.directionsUrl;
 
 const platformNames: Record<SocialPlatform, string> = {
   instagram: 'Instagram',
@@ -22,7 +24,7 @@ const platformNames: Record<SocialPlatform, string> = {
 <footer
   id="contact"
   class="texture bg-(--theme-footer-bg) px-4 pt-16 pb-8 text-(--theme-footer-ink) lg:pt-24"
-  style="--title-shadow: var(--theme-footer-shadow)"
+  style="--title-shadow: var(--theme-footer-shadow); --button-bg: var(--theme-footer-button-bg); --button-ink: var(--theme-footer-button-ink); --button-hover-bg: var(--theme-footer-button-hover-bg); --button-hover-ink: var(--theme-footer-button-hover-ink)"
 >
   <div class="mx-auto max-w-site lg:px-6">
     <h2 class="section-title text-center text-5xl sm:text-6xl lg:text-[5rem]" data-reveal="left">{contact.title}</h2>
@@ -48,55 +50,84 @@ const platformNames: Record<SocialPlatform, string> = {
       )
     }
 
-    <div class="mt-14 flex flex-wrap justify-center gap-x-16 gap-y-12">
+    <div
+      class:list={[
+        'mt-14 grid gap-12',
+        mapEmbedUrl && 'mx-auto max-w-5xl items-center lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] lg:gap-16',
+      ]}
+    >
+      <div class:list={['flex flex-wrap gap-x-16 gap-y-12', !mapEmbedUrl && 'justify-center']}>
+        {
+          locations.map((location) => (
+            <div class="w-full max-w-xs font-small text-[15px]" data-reveal="up">
+              <h3 class="font-display text-xl font-extrabold uppercase">{location.name}</h3>
+              <dl class="mt-5 space-y-3">
+                <div class="flex gap-3">
+                  <dt>
+                    <Icon name="phone" class="size-5 text-(--theme-footer-icon)" />
+                    <span class="sr-only">{contact.labels.phone}</span>
+                  </dt>
+                  <dd>
+                    <a href={`tel:${location.phone.replace(/\s/g, '')}`} class="hover:underline">
+                      {location.phone}
+                    </a>
+                  </dd>
+                </div>
+                <div class="flex gap-3">
+                  <dt>
+                    <Icon name="mail" class="size-5 text-(--theme-footer-icon)" />
+                    <span class="sr-only">{contact.labels.email}</span>
+                  </dt>
+                  <dd>
+                    <a href={`mailto:${location.email}`} class="hover:underline">
+                      {location.email}
+                    </a>
+                  </dd>
+                </div>
+                <div class="flex gap-3">
+                  <dt>
+                    <Icon name="pin" class="size-5 text-(--theme-footer-icon)" />
+                    <span class="sr-only">{contact.labels.address}</span>
+                  </dt>
+                  <dd>{location.address}</dd>
+                </div>
+                <div class="flex gap-3">
+                  <dt>
+                    <Icon name="clock" class="size-5 text-(--theme-footer-icon)" />
+                    <span class="sr-only">{contact.labels.hours}</span>
+                  </dt>
+                  <dd>
+                    {location.hours.map((line) => (
+                      <span class="block">{line}</span>
+                    ))}
+                  </dd>
+                </div>
+              </dl>
+            </div>
+          ))
+        }
+      </div>
+
       {
-        locations.map((location) => (
-          <div class="w-full max-w-xs font-small text-[15px]" data-reveal="up">
-            <h3 class="font-display text-xl font-extrabold uppercase">{location.name}</h3>
-            <dl class="mt-5 space-y-3">
-              <div class="flex gap-3">
-                <dt>
-                  <Icon name="phone" class="size-5 text-(--theme-footer-icon)" />
-                  <span class="sr-only">{contact.labels.phone}</span>
-                </dt>
-                <dd>
-                  <a href={`tel:${location.phone.replace(/\s/g, '')}`} class="hover:underline">
-                    {location.phone}
-                  </a>
-                </dd>
-              </div>
-              <div class="flex gap-3">
-                <dt>
-                  <Icon name="mail" class="size-5 text-(--theme-footer-icon)" />
-                  <span class="sr-only">{contact.labels.email}</span>
-                </dt>
-                <dd>
-                  <a href={`mailto:${location.email}`} class="hover:underline">
-                    {location.email}
-                  </a>
-                </dd>
-              </div>
-              <div class="flex gap-3">
-                <dt>
-                  <Icon name="pin" class="size-5 text-(--theme-footer-icon)" />
-                  <span class="sr-only">{contact.labels.address}</span>
-                </dt>
-                <dd>{location.address}</dd>
-              </div>
-              <div class="flex gap-3">
-                <dt>
-                  <Icon name="clock" class="size-5 text-(--theme-footer-icon)" />
-                  <span class="sr-only">{contact.labels.hours}</span>
-                </dt>
-                <dd>
-                  {location.hours.map((line) => (
-                    <span class="block">{line}</span>
-                  ))}
-                </dd>
-              </div>
-            </dl>
+        mapEmbedUrl && (
+          <div data-reveal="up">
+            <div class="aspect-[16/10] overflow-hidden rounded-2xl border-4 border-current">
+              <iframe
+                src={mapEmbedUrl}
+                title={contact.mapTitle}
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                allowfullscreen
+                class="size-full"
+              />
+            </div>
+            {directionsUrl && (
+              <a href={directionsUrl} class="pill mt-6" target="_blank" rel="noopener">
+                {contact.directions}
+              </a>
+            )}
           </div>
-        ))
+        )
       }
     </div>
 

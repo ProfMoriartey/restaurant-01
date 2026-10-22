@@ -1,0 +1,80 @@
+---
+import PlateArt from './placeholders/PlateArt.astro';
+import type { Content } from '../lib/types';
+
+interface Props {
+  content: Content;
+}
+
+const { order, locations } = Astro.props.content;
+---
+
+<section
+  id="order"
+  class="overflow-hidden bg-(--theme-order-bg) px-4 py-16 text-(--theme-order-ink) lg:py-24"
+  style="--title-shadow: var(--theme-order-shadow)"
+>
+  <div class="mx-auto grid max-w-site items-center gap-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] lg:px-6">
+    <div>
+      <h2 class="section-title text-5xl sm:text-6xl lg:text-[5rem]" data-reveal="left">{order.title}</h2>
+      {
+        locations.map((location) => (
+          <div class="mt-10" data-reveal="up">
+            <h3 class="font-display text-xl font-extrabold underline decoration-2 underline-offset-8">
+              {location.name}
+            </h3>
+            {location.deliveryApps.length ? (
+              <ul class="mt-6 flex max-w-xs flex-col gap-3">
+                {location.deliveryApps.map((app) => (
+                  <li>
+                    <a href={app.url} class="pill w-full" target="_blank" rel="noopener">
+                      {app.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p class="mt-4">{order.noApps}</p>
+            )}
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="relative mx-auto w-full max-w-[22rem] sm:max-w-md lg:max-w-[38rem]" data-reveal="right">
+      <!-- Curved text along the upper-left of the rim; it stays still while the plate turns. -->
+      <svg viewBox="0 0 600 600" class="absolute inset-0 size-full overflow-visible" aria-hidden="true">
+        <defs>
+          <path id="plate-rim" d="M 75.7 429.5 A 259 259 0 0 1 429.5 75.7" />
+        </defs>
+        <text
+          class="fill-current font-display text-[26px] font-extrabold tracking-[0.12em] uppercase"
+          text-anchor="middle"
+        >
+          <textPath href="#plate-rim" startOffset="50%">{order.badge}</textPath>
+        </text>
+      </svg>
+      <div class="p-[11%]">
+        <div class="rounded-full shadow-[0_24px_50px_rgb(0_0_0/0.3)]">
+          <div data-scroll-rotate>
+            {
+              order.image ? (
+                <img
+                  src={order.image.src}
+                  alt={order.image.alt}
+                  width={order.image.width}
+                  height={order.image.height}
+                  loading="lazy"
+                  class="aspect-square w-full rounded-full object-cover"
+                />
+              ) : (
+                <PlateArt class="block w-full" />
+              )
+            }
+          </div>
+        </div>
+      </div>
+      <span class="sr-only">{order.badge}</span>
+    </div>
+  </div>
+</section>

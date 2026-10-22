@@ -1,0 +1,54 @@
+---
+// Drawn overhead plate, standing in for the order section's dish photo.
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<svg viewBox="0 0 400 400" class={className} aria-hidden="true">
+  <!-- plate -->
+  <circle cx="200" cy="200" r="198" fill="#f4f1ec" />
+  <circle cx="200" cy="200" r="186" fill="none" stroke="#ff2a00" stroke-width="4" />
+  <circle cx="200" cy="200" r="178" fill="none" stroke="#1e1d1e" stroke-width="1.5" opacity="0.4" />
+  <circle cx="200" cy="200" r="140" fill="#ffffff" />
+
+  <!-- fries -->
+  <g fill="#ffc62e" stroke="#e0a400" stroke-width="1.5">
+    <rect x="96" y="214" width="80" height="13" rx="4" transform="rotate(-28 136 220)" />
+    <rect x="104" y="236" width="86" height="13" rx="4" transform="rotate(-14 147 242)" />
+    <rect x="100" y="258" width="78" height="13" rx="4" transform="rotate(8 139 264)" />
+    <rect x="116" y="196" width="74" height="13" rx="4" transform="rotate(-48 153 202)" />
+    <rect x="124" y="276" width="70" height="13" rx="4" transform="rotate(22 159 282)" />
+    <rect x="92" y="226" width="64" height="13" rx="4" transform="rotate(60 124 232)" />
+  </g>
+
+  <!-- burger seen from above -->
+  <circle cx="236" cy="172" r="82" fill="#55b33b" />
+  <circle cx="236" cy="172" r="76" fill="#d98a32" />
+  <circle cx="236" cy="172" r="72" fill="#e89a3c" />
+  <path d="M188 136a64 64 0 0 1 70-22" stroke="#f7c27a" stroke-width="9" fill="none" stroke-linecap="round" opacity="0.7" />
+  <g fill="#fff3d6">
+    <ellipse cx="214" cy="150" rx="6" ry="3.5" transform="rotate(-20 214 150)" />
+    <ellipse cx="252" cy="140" rx="6" ry="3.5" transform="rotate(15 252 140)" />
+    <ellipse cx="270" cy="176" rx="6" ry="3.5" transform="rotate(70 270 176)" />
+    <ellipse cx="232" cy="178" rx="6" ry="3.5" transform="rotate(-40 232 178)" />
+    <ellipse cx="206" cy="196" rx="6" ry="3.5" transform="rotate(30 206 196)" />
+    <ellipse cx="248" cy="210" rx="6" ry="3.5" transform="rotate(-10 248 210)" />
+  </g>
+
+  <!-- sauce cup -->
+  <circle cx="262" cy="282" r="30" fill="#e6e1d8" />
+  <circle cx="262" cy="282" r="24" fill="#d8321c" />
+  <circle cx="254" cy="274" r="6" fill="#fff" opacity="0.35" />
+
+  <!-- herbs -->
+  <g fill="#3f8f2c">
+    <circle cx="150" cy="148" r="3" />
+    <circle cx="170" cy="126" r="2.5" />
+    <circle cx="300" cy="236" r="3" />
+    <circle cx="208" cy="300" r="2.5" />
+    <circle cx="318" cy="200" r="2.5" />
+  </g>
+</svg>

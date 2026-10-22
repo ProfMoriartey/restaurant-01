@@ -47,12 +47,7 @@ export const en: Content = {
   order: {
     title: 'Order online',
     noApps: 'Ordering links coming soon.',
-  },
-  visit: {
-    title: 'Or come eat here',
-    text: 'Address details go here, Bursa.',
-    directions: 'Get directions',
-    mapTitle: 'Flu Burger on the map',
+    badge: 'Fast & hot delivery',
   },
   franchise: {
     title: 'Franchise',
@@ -70,6 +65,8 @@ export const en: Content = {
     title: 'Contact',
     subtitle: 'Open every day!',
     labels: { phone: 'Phone', email: 'Email', address: 'Address', hours: 'Opening hours' },
+    directions: 'Get directions',
+    mapTitle: 'Flu Burger on the map',
     rights: 'All rights reserved.',
   },
   locations: [

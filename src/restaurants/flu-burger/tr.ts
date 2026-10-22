@@ -47,12 +47,7 @@ export const tr: Content = {
   order: {
     title: 'Online sipariş',
     noApps: 'Sipariş bağlantıları yakında.',
-  },
-  visit: {
-    title: 'Ya da gel burada ye',
-    text: 'Adres bilgisi buraya gelecek, Bursa.',
-    directions: 'Yol tarifi al',
-    mapTitle: 'Flu Burger harita konumu',
+    badge: 'Hızlı ve sıcak teslimat',
   },
   franchise: {
     title: 'Franchise',
@@ -70,6 +65,8 @@ export const tr: Content = {
     title: 'İletişim',
     subtitle: 'Her gün açığız!',
     labels: { phone: 'Telefon', email: 'E-posta', address: 'Adres', hours: 'Çalışma saatleri' },
+    directions: 'Yol tarifi al',
+    mapTitle: 'Flu Burger harita konumu',
     rights: 'Tüm hakları saklıdır.',
   },
   locations: [

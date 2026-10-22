@@ -61,3 +61,34 @@ ids.forEach((id) => {
   const section = document.getElementById(id);
   if (section) sectionObserver.observe(section);
 });
+
+// Turn [data-scroll-rotate] elements as the page scrolls: 100° anticlockwise over the
+// time each one crosses the screen. Desktop and tablet only, and never with reduced motion.
+const rotators = document.querySelectorAll<HTMLElement>('[data-scroll-rotate]');
+const rotateQuery = window.matchMedia('(min-width: 48rem) and (prefers-reduced-motion: no-preference)');
+let rotateFrame = 0;
+
+function updateRotation() {
+  rotateFrame = 0;
+  const vh = window.innerHeight;
+  rotators.forEach((el) => {
+    if (!rotateQuery.matches) {
+      el.style.transform = '';
+      return;
+    }
+    const rect = el.getBoundingClientRect();
+    const progress = Math.min(1, Math.max(0, (vh - rect.top) / (vh + rect.height)));
+    el.style.transform = `rotate(${50 - progress * 100}deg)`;
+  });
+}
+
+function queueRotation() {
+  if (!rotateFrame) rotateFrame = requestAnimationFrame(updateRotation);
+}
+
+if (rotators.length) {
+  window.addEventListener('scroll', queueRotation, { passive: true });
+  window.addEventListener('resize', queueRotation);
+  rotateQuery.addEventListener('change', queueRotation);
+  updateRotation();
+}

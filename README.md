@@ -33,9 +33,9 @@ Each one is switched on or off in the restaurant's `settings.ts`. They show in t
 | `menu` | Split card with a menu button per location |
 | `infoStrip` | Four icons with two short lines each |
 | `categories` | Category tiles; the name and a short line fade in on hover |
-| `order` | Delivery app buttons per location, and a map panel when `mapEmbedUrl` is set |
+| `order` | Delivery app buttons per location, and a dish photo that turns as the page scrolls |
 | `franchise` | Enquiry form; set `franchiseFormAction` to a form service endpoint |
-| `contact` | Social links and each location's phone, email, address and hours |
+| `contact` | Social links, each location's phone, email, address and hours, and a map when `mapEmbedUrl` is set |
 
 ## Add a restaurant
 

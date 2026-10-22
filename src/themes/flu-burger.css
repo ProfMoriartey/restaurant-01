@@ -45,13 +45,6 @@
   --theme-order-bg: #ff2a00;
   --theme-order-ink: #ffffff;
   --theme-order-shadow: #1e1d1e;
-  --theme-visit-bg: #ffffff;
-  --theme-visit-ink: #1e1d1e;
-  --theme-visit-shadow: #ff2a00;
-  --theme-visit-button-bg: #1e1d1e;
-  --theme-visit-button-ink: #ffffff;
-  --theme-visit-button-hover-bg: #ff2a00;
-  --theme-visit-button-hover-ink: #ffffff;
 
   --theme-button-bg: #1e1d1e;
   --theme-button-ink: #ffffff;
@@ -70,6 +63,10 @@
   --theme-footer-ink: #ffffff;
   --theme-footer-shadow: #ff2a00;
   --theme-footer-icon: #ff2a00;
+  --theme-footer-button-bg: #ff2a00;
+  --theme-footer-button-ink: #ffffff;
+  --theme-footer-button-hover-bg: #ffffff;
+  --theme-footer-button-hover-ink: #1e1d1e;
 
   /* Textures: none in this theme. */
   --theme-texture: none;
