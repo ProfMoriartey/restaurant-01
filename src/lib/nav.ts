@@ -29,3 +29,9 @@ export function isExternal(href: string) {
 export function privacyHref(lang: string, slug: string) {
   return getRelativeLocaleUrl(lang, slug);
 }
+
+/** The full menu link for a language, if the restaurant has one. */
+export function menuHref(settings: Settings, lang: string) {
+  const { menuUrl } = settings;
+  return typeof menuUrl === 'string' ? menuUrl : menuUrl?.[lang];
+}

@@ -50,5 +50,5 @@ const sections = (Object.keys(settings.sections) as SectionId[]).filter(
     }
   </main>
   {settings.sections.contact && <Contact content={text} lang={lang} />}
-  <QuickBar content={text} />
+  <QuickBar content={text} lang={lang} />
 </Base>

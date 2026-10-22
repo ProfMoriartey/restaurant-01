@@ -29,8 +29,11 @@ const isLink = (url?: string): url is string => !!url && /^https?:\/\//.test(url
  * Restaurant details in schema.org form, which Google reads for maps, search results
  * and the business panel. Built from the same content the page shows.
  */
-export function restaurantSchema(settings: Settings, content: Content, pageUrl: URL, site?: string) {
+export function restaurantSchema(settings: Settings, content: Content, lang: string, pageUrl: URL, site?: string) {
   const absolute = (path: string) => (site ? new URL(withBase(path), site).href : undefined);
+
+  // Same as menuHref in nav.ts, which can't be imported here: astro.config loads this file.
+  const menuUrl = typeof settings.menuUrl === 'string' ? settings.menuUrl : settings.menuUrl?.[lang];
 
   return content.locations.map((location) => {
     const { postalAddress: a } = location;
@@ -47,7 +50,7 @@ export function restaurantSchema(settings: Settings, content: Content, pageUrl: 
       servesCuisine: settings.seo.cuisine,
       priceRange: settings.seo.priceRange,
       acceptsReservations: false,
-      menu: isLink(settings.menuUrl) ? settings.menuUrl : undefined,
+      menu: isLink(menuUrl) ? menuUrl : undefined,
       hasMap: isLink(location.directionsUrl) ? location.directionsUrl : undefined,
       address: {
         '@type': 'PostalAddress',

@@ -80,7 +80,7 @@ const browserColor: Record<ThemeId, string> = { 'flu-burger': '#ffffff', 'retro-
     {/* Business details for Google: address, hours, phone, menu. */}
     {
       !alternates &&
-        restaurantSchema(settings, content, pageUrl, site).map((schema) => (
+        restaurantSchema(settings, content, lang, pageUrl, site).map((schema) => (
           <script type="application/ld+json" set:html={JSON.stringify(schema)} />
         ))
     }

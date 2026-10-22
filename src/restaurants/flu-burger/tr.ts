@@ -42,10 +42,10 @@ export const tr: Content = {
   categories: {
     title: 'Menü',
     items: [
-      { name: 'Burgerler', description: 'Kategori açıklaması buraya gelecek.', href: '#', art: 'burger' },
-      { name: 'Sosisliler', description: 'Kategori açıklaması buraya gelecek.', href: '#', art: 'hotdog' },
-      { name: 'Yan lezzetler', description: 'Kategori açıklaması buraya gelecek.', href: '#', art: 'fries' },
-      { name: 'İçecekler', description: 'Kategori açıklaması buraya gelecek.', href: '#', art: 'drink' },
+      { name: 'Burgerler', description: 'Kategori açıklaması buraya gelecek.', art: 'burger' },
+      { name: 'Sosisliler', description: 'Kategori açıklaması buraya gelecek.', art: 'hotdog' },
+      { name: 'Yan lezzetler', description: 'Kategori açıklaması buraya gelecek.', art: 'fries' },
+      { name: 'İçecekler', description: 'Kategori açıklaması buraya gelecek.', art: 'drink' },
     ],
   },
   order: {

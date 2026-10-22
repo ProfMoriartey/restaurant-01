@@ -42,10 +42,10 @@ export const en: Content = {
   categories: {
     title: 'Menu',
     items: [
-      { name: 'Burgers', description: 'A short category description goes here.', href: '#', art: 'burger' },
-      { name: 'Hot dogs', description: 'A short category description goes here.', href: '#', art: 'hotdog' },
-      { name: 'Sides', description: 'A short category description goes here.', href: '#', art: 'fries' },
-      { name: 'Drinks', description: 'A short category description goes here.', href: '#', art: 'drink' },
+      { name: 'Burgers', description: 'A short category description goes here.', art: 'burger' },
+      { name: 'Hot dogs', description: 'A short category description goes here.', art: 'hotdog' },
+      { name: 'Sides', description: 'A short category description goes here.', art: 'fries' },
+      { name: 'Drinks', description: 'A short category description goes here.', art: 'drink' },
     ],
   },
   order: {

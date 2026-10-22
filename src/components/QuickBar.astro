@@ -2,20 +2,21 @@
 // Buttons fixed to the bottom of phone and tablet screens for the things visitors come to do.
 import Icon from './Icon.astro';
 import { settings } from '../site.config';
-import { isExternal } from '../lib/nav';
+import { isExternal, menuHref } from '../lib/nav';
 import type { Content, IconName, QuickAction, SocialPlatform } from '../lib/types';
 
 interface Props {
   content: Content;
+  lang: string;
   /** Prefix for links to home page sections; empty on the home page itself. */
   base?: string;
 }
 
-const { content, base = '' } = Astro.props;
+const { content, lang, base = '' } = Astro.props;
 const location = content.locations[0];
 
 const targets: Record<QuickAction, { href?: string; icon: IconName | SocialPlatform }> = {
-  menu: { href: settings.menuUrl ?? (settings.sections.categories ? '#categories' : undefined), icon: 'cutlery' },
+  menu: { href: menuHref(settings, lang) ?? (settings.sections.categories ? '#categories' : undefined), icon: 'cutlery' },
   call: { href: location && `tel:${location.phone.replace(/\s/g, '')}`, icon: 'phone' },
   directions: { href: location?.directionsUrl, icon: 'pin' },
   order: {

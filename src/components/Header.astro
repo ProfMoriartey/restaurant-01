@@ -20,7 +20,7 @@ const base = page === 'home' ? '' : home;
 ---
 
 <header class="bg-header text-header-ink">
-  <div class="relative mx-auto flex h-24 max-w-site items-center justify-center px-4 lg:h-40 lg:justify-between lg:px-6">
+  <div class="mx-auto flex h-24 max-w-site items-center justify-between px-4 lg:h-40 lg:px-6">
     <a href={home} class="block shrink-0">
       <img
         src={withBase(settings.logo.src)}
@@ -48,7 +48,7 @@ const base = page === 'home' ? '' : home;
 
     <button
       type="button"
-      class="absolute right-4 grid size-11 place-items-center lg:hidden"
+      class="-mr-1.5 grid size-11 place-items-center lg:hidden"
       aria-expanded="false"
       aria-controls="mobile-menu"
       data-menu-toggle

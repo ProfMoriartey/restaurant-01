@@ -32,7 +32,7 @@ export const settings: Settings = {
     { platform: 'whatsapp', url: '#' },
   ],
   timeZone: 'Europe/Istanbul',
-  // Placeholder until the restaurant's menu website link arrives.
-  menuUrl: '#categories',
+  // The full menu. To send each language to its own page: { tr: '…', en: '…' }.
+  menuUrl: 'https://www.menu-pedia.com/en/fluburger',
   quickActions: ['menu', 'call', 'directions', 'order'],
 };

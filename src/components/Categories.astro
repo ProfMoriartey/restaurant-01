@@ -1,14 +1,18 @@
 ---
 import FoodArt from './placeholders/FoodArt.astro';
-import { isExternal } from '../lib/nav';
+import { isExternal, menuHref } from '../lib/nav';
+import { settings } from '../site.config';
 import { withBase } from '../lib/paths';
 import type { Content } from '../lib/types';
 
 interface Props {
   content: Content;
+  lang: string;
 }
 
-const { title, items } = Astro.props.content.categories;
+const { content, lang } = Astro.props;
+const { title, items } = content.categories;
+const menu = menuHref(settings, lang) ?? '#categories';
 
 // Up to 4 tiles alternate colours; larger grids switch colour per row of 4.
 const tone = (i: number) => ((items.length > 4 ? Math.floor(i / 4) : i) % 2 === 0 ? 'a' : 'b');
@@ -31,10 +35,10 @@ const tone = (i: number) => ((items.length > 4 ? Math.floor(i / 4) : i) % 2 === 
         items.map((item, i) => (
           <li data-reveal="up" style={`--reveal-delay: ${(i % 4) * 0.12}s`}>
             <a
-              href={item.href}
+              href={item.href ?? menu}
               class="tile"
               style={`--tile-bg: var(--theme-tile-${tone(i)})`}
-              {...(isExternal(item.href) ? { target: '_blank', rel: 'noopener' } : {})}
+              {...(isExternal(item.href ?? menu) ? { target: '_blank', rel: 'noopener' } : {})}
             >
               {item.image ? (
                 <img

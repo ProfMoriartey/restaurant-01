@@ -53,8 +53,8 @@ export interface Settings {
   social: { platform: SocialPlatform; url: string }[];
   /** IANA time zone the opening hours are in, e.g. 'Europe/Istanbul'. */
   timeZone: string;
-  /** The full menu, e.g. a separate menu website. */
-  menuUrl?: string;
+  /** The full menu, e.g. a separate menu website: one link, or one per language ({ tr: '…', en: '…' }). */
+  menuUrl?: string | Record<string, string>;
   /** WhatsApp number in international format without +, e.g. '902240000000'. */
   whatsapp?: string;
   /** Buttons in the bar fixed to the bottom of phone and tablet screens, in order. Empty hides it. */
@@ -114,7 +114,8 @@ export interface Content {
     items: {
       name: string;
       description: string;
-      href: string;
+      /** Where the tile leads; defaults to the full menu. */
+      href?: string;
       image?: Image;
       art?: FoodArt;
     }[];
