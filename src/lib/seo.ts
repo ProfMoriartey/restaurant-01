@@ -1,8 +1,13 @@
 import type { Content, Settings, Weekday } from './types';
+import { withBase } from './paths';
 
-/** The live address: the restaurant's own domain, or Vercel's production address until it has one. */
+/**
+ * The live address: the restaurant's own domain, else SITE_URL from the build (set by the
+ * GitHub Pages workflow), else Vercel's production address.
+ */
 export function siteUrl(settings: Settings) {
   if (settings.siteUrl) return settings.siteUrl;
+  if (process.env.SITE_URL) return process.env.SITE_URL;
   const vercel = process.env.VERCEL_PROJECT_PRODUCTION_URL;
   return vercel ? `https://${vercel}` : undefined;
 }
@@ -25,7 +30,7 @@ const isLink = (url?: string): url is string => !!url && /^https?:\/\//.test(url
  * and the business panel. Built from the same content the page shows.
  */
 export function restaurantSchema(settings: Settings, content: Content, pageUrl: URL, site?: string) {
-  const absolute = (path: string) => (site ? new URL(path, site).href : undefined);
+  const absolute = (path: string) => (site ? new URL(withBase(path), site).href : undefined);
 
   return content.locations.map((location) => {
     const { postalAddress: a } = location;

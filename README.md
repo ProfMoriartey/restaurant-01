@@ -12,6 +12,12 @@ npm run dev      # local preview at http://localhost:4321
 npm run build    # static site in dist/
 ```
 
+
+## Publish it
+
+- **GitHub Pages:** `.github/workflows/deploy-pages.yml` builds and publishes the site on every push to `main`. Turn it on once under the repo's Settings → Pages → Source: **GitHub Actions**. The site is served from a folder (`https://<user>.github.io/<repo>/`); the workflow passes that folder to the build, so all links and files follow it.
+- **Vercel / Netlify / Cloudflare Pages:** import the repo with the Astro preset; build command `npm run build`, output folder `dist`, Node 22.22 or newer.
+- **Own domain:** set `siteUrl` in the restaurant's `settings.ts`.
 ## Where things live
 
 | What | Where |

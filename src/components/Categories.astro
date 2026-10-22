@@ -1,6 +1,7 @@
 ---
 import FoodArt from './placeholders/FoodArt.astro';
 import { isExternal } from '../lib/nav';
+import { withBase } from '../lib/paths';
 import type { Content } from '../lib/types';
 
 interface Props {
@@ -37,7 +38,7 @@ const tone = (i: number) => ((items.length > 4 ? Math.floor(i / 4) : i) % 2 === 
             >
               {item.image ? (
                 <img
-                  src={item.image.src}
+                  src={withBase(item.image.src)}
                   alt=""
                   width={item.image.width}
                   height={item.image.height}

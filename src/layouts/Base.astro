@@ -12,6 +12,7 @@ import '../styles/global.css';
 import { getAbsoluteLocaleUrl } from 'astro:i18n';
 import { settings, content as allContent } from '../site.config';
 import { restaurantSchema } from '../lib/seo';
+import { withBase } from '../lib/paths';
 import type { Content, ThemeId } from '../lib/types';
 
 interface Props {
@@ -30,7 +31,7 @@ const alternateUrl = (code: string) =>
   alternates ? new URL(alternates[code], Astro.site).href : getAbsoluteLocaleUrl(code);
 const site = Astro.site?.href;
 const pageUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
-const absolute = (path: string) => (site ? new URL(path, site).href : path);
+const absolute = (path: string) => (site ? new URL(withBase(path), site).href : withBase(path));
 
 // Colour of the phone browser bar: the theme's header colour.
 const browserColor: Record<ThemeId, string> = { 'flu-burger': '#ffffff', 'retro-diner': '#560006' };
@@ -44,8 +45,8 @@ const browserColor: Record<ThemeId, string> = { 'flu-burger': '#ffffff', 'retro-
     <title>{pageTitle}</title>
     <meta name="description" content={meta.description} />
     <meta name="theme-color" content={browserColor[settings.theme]} />
-    <link rel="icon" type="image/png" sizes="32x32" href={settings.icons.favicon} />
-    <link rel="apple-touch-icon" href={settings.icons.appleTouch} />
+    <link rel="icon" type="image/png" sizes="32x32" href={withBase(settings.icons.favicon)} />
+    <link rel="apple-touch-icon" href={withBase(settings.icons.appleTouch)} />
 
     {/* The same page in each language, for search engines. */}
     {site && <link rel="canonical" href={pageUrl.href} />}
@@ -56,7 +57,7 @@ const browserColor: Record<ThemeId, string> = { 'flu-burger': '#ffffff', 'retro-
         ))
     }
     {site && <link rel="alternate" hreflang="x-default" href={alternateUrl(settings.defaultLanguage)} />}
-    {site && <link rel="sitemap" href="/sitemap-index.xml" />}
+    {site && <link rel="sitemap" href={withBase('/sitemap-index.xml')} />}
 
     {/* Link previews on WhatsApp, Instagram, Facebook and X. */}
     <meta property="og:type" content="website" />

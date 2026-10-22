@@ -6,6 +6,8 @@ import { siteUrl } from './src/lib/seo';
 
 export default defineConfig({
   site: siteUrl(settings),
+  // The folder the site is served from, e.g. /restaurant-01 on GitHub Pages; the root everywhere else.
+  base: process.env.BASE_PATH || undefined,
   i18n: {
     locales: settings.languages,
     defaultLocale: settings.defaultLanguage,

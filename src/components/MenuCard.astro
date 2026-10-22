@@ -1,5 +1,6 @@
 ---
 import FoodArt from './placeholders/FoodArt.astro';
+import { withBase } from '../lib/paths';
 import type { Content } from '../lib/types';
 
 interface Props {
@@ -16,7 +17,7 @@ const menuLocations = locations.filter((l) => l.menuLink);
       {
         menu.image ? (
           <img
-            src={menu.image.src}
+            src={withBase(menu.image.src)}
             alt={menu.image.alt}
             width={menu.image.width}
             height={menu.image.height}

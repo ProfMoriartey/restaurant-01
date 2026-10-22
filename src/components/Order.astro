@@ -1,5 +1,6 @@
 ---
 import PlateArt from './placeholders/PlateArt.astro';
+import { withBase } from '../lib/paths';
 import type { Content } from '../lib/types';
 
 interface Props {
@@ -60,7 +61,7 @@ const { order, locations } = Astro.props.content;
             {
               order.image ? (
                 <img
-                  src={order.image.src}
+                  src={withBase(order.image.src)}
                   alt={order.image.alt}
                   width={order.image.width}
                   height={order.image.height}

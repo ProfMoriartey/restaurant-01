@@ -3,6 +3,7 @@ import { getRelativeLocaleUrl } from 'astro:i18n';
 import LanguageSwitcher from './LanguageSwitcher.astro';
 import { settings } from '../site.config';
 import { navLinks } from '../lib/nav';
+import { withBase } from '../lib/paths';
 import type { Content } from '../lib/types';
 
 interface Props {
@@ -22,7 +23,7 @@ const base = page === 'home' ? '' : home;
   <div class="relative mx-auto flex h-24 max-w-site items-center justify-center px-4 lg:h-40 lg:justify-between lg:px-6">
     <a href={home} class="block shrink-0">
       <img
-        src={settings.logo.src}
+        src={withBase(settings.logo.src)}
         alt={settings.name}
         width={settings.logo.width}
         height={settings.logo.height}

@@ -1,5 +1,6 @@
 ---
 import BurgerArt from './placeholders/BurgerArt.astro';
+import { withBase } from '../lib/paths';
 import { highlightParts } from '../lib/nav';
 import type { Content } from '../lib/types';
 
@@ -39,7 +40,7 @@ const { hero } = Astro.props.content;
       {
         hero.image ? (
           <img
-            src={hero.image.src}
+            src={withBase(hero.image.src)}
             alt={hero.image.alt}
             width={hero.image.width}
             height={hero.image.height}
