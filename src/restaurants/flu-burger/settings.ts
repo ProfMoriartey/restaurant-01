@@ -17,4 +17,11 @@ export const settings: Settings = {
   },
   // Placeholder: central Bursa until the restaurant's address arrives.
   mapEmbedUrl: 'https://www.google.com/maps?q=Bursa,+Turkey&output=embed',
+  // Placeholder links until the restaurant's accounts are confirmed.
+  social: [
+    { platform: 'instagram', url: '#' },
+    { platform: 'facebook', url: '#' },
+    { platform: 'tiktok', url: '#' },
+    { platform: 'whatsapp', url: '#' },
+  ],
 };

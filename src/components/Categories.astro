@@ -1,0 +1,57 @@
+---
+import FoodArt from './placeholders/FoodArt.astro';
+import type { Content } from '../lib/types';
+
+interface Props {
+  content: Content;
+}
+
+const { title, items } = Astro.props.content.categories;
+
+// Up to 4 tiles alternate colours; larger grids switch colour per row of 4.
+const tone = (i: number) => ((items.length > 4 ? Math.floor(i / 4) : i) % 2 === 0 ? 'a' : 'b');
+---
+
+<section
+  id="categories"
+  class="texture bg-(--theme-grid-bg) py-16 lg:py-24"
+  style="--title-shadow: var(--theme-grid-shadow)"
+>
+  <div class="mx-auto max-w-site px-4 lg:px-6">
+    <h2
+      class="section-title text-center text-5xl text-(--theme-grid-ink) sm:text-6xl lg:text-[5rem]"
+      data-reveal="left"
+    >
+      {title}
+    </h2>
+    <ul class="mx-auto mt-12 grid grid-cols-2 gap-3 sm:gap-5 lg:mt-16 lg:grid-cols-4">
+      {
+        items.map((item, i) => (
+          <li data-reveal="up" style={`--reveal-delay: ${(i % 4) * 0.12}s`}>
+            <a href={item.href} class="tile" style={`--tile-bg: var(--theme-tile-${tone(i)})`}>
+              {item.image ? (
+                <img
+                  src={item.image.src}
+                  alt=""
+                  width={item.image.width}
+                  height={item.image.height}
+                  loading="lazy"
+                  class="absolute inset-0 size-full object-contain p-[8%]"
+                />
+              ) : (
+                <FoodArt kind={item.art ?? 'burger'} class="absolute inset-0 size-full p-[10%]" />
+              )}
+              <span class="absolute inset-x-0 bottom-0 bg-black/60 px-2 py-2 text-center font-display text-sm font-extrabold text-white uppercase sm:text-base [@media(hover:hover)]:hidden">
+                {item.name}
+              </span>
+              <span class="tile-back">
+                <span class="font-display text-xl font-extrabold uppercase lg:text-2xl">{item.name}</span>
+                <span class="font-small text-sm leading-snug">{item.description}</span>
+              </span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

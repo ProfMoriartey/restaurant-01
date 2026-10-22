@@ -21,8 +21,58 @@
   --theme-headline-weight: 800;
   --theme-headline-tracking: -0.01em;
 
-  /* Hard offset shadow for section titles. */
-  --theme-title-shadow: 4px 4px 0 #ff2a00;
+  /* Sections. Each *-shadow is the colour of that section's offset title shadow. */
+  --theme-info-bg: #ffffff;
+  --theme-info-ink: #1e1d1e;
+  --theme-info-icon: #ff2a00;
+  --theme-info-border: #1e1d1e1a;
 
+  --theme-menu-band: #ffffff;
+  --theme-menu-photo-bg: #1e1d1e;
+  --theme-menu-text-bg: #ff2a00;
+  --theme-menu-ink: #ffffff;
+  --theme-menu-shadow: #1e1d1e;
+
+  --theme-grid-bg: #ffffff;
+  --theme-grid-ink: #1e1d1e;
+  --theme-grid-shadow: #ff2a00;
+  --theme-tile-a: #ff2a00;
+  --theme-tile-b: #1e1d1e;
+  --theme-tile-frame: #1e1d1e;
+  --theme-tile-back-bg: #ff2a00;
+  --theme-tile-back-ink: #ffffff;
+
+  --theme-order-bg: #ff2a00;
+  --theme-order-ink: #ffffff;
+  --theme-order-shadow: #1e1d1e;
+  --theme-visit-bg: #ffffff;
+  --theme-visit-ink: #1e1d1e;
+  --theme-visit-shadow: #ff2a00;
+  --theme-visit-button-bg: #1e1d1e;
+  --theme-visit-button-ink: #ffffff;
+  --theme-visit-button-hover-bg: #ff2a00;
+  --theme-visit-button-hover-ink: #ffffff;
+
+  --theme-button-bg: #1e1d1e;
+  --theme-button-ink: #ffffff;
+  --theme-button-hover-bg: #ffffff;
+  --theme-button-hover-ink: #1e1d1e;
+
+  --theme-franchise-bg: #1e1d1e;
+  --theme-franchise-ink: #ffffff;
+  --theme-franchise-shadow: #ff2a00;
+  --theme-input-bg: rgb(255 255 255 / 0.08);
+  --theme-input-border: rgb(255 255 255 / 0.25);
+  --theme-submit-bg: #ff2a00;
+  --theme-submit-ink: #ffffff;
+
+  --theme-footer-bg: #1e1d1e;
+  --theme-footer-ink: #ffffff;
+  --theme-footer-shadow: #ff2a00;
+  --theme-footer-icon: #ff2a00;
+
+  /* Textures: none in this theme. */
   --theme-texture: none;
+  --theme-stripes: none;
+  --theme-tile-stripes: repeating-linear-gradient(135deg, rgb(255 255 255 / 0.06) 0 14px, transparent 14px 28px);
 }

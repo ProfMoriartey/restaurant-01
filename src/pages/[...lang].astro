@@ -2,7 +2,14 @@
 import Base from '../layouts/Base.astro';
 import Header from '../components/Header.astro';
 import Hero from '../components/Hero.astro';
+import MenuCard from '../components/MenuCard.astro';
+import InfoStrip from '../components/InfoStrip.astro';
+import Categories from '../components/Categories.astro';
+import OrderVisit from '../components/OrderVisit.astro';
+import Franchise from '../components/Franchise.astro';
+import Contact from '../components/Contact.astro';
 import { settings, content } from '../site.config';
+import type { SectionId } from '../lib/types';
 
 // One page per language: the default at `/`, the others at `/<code>`.
 export function getStaticPaths() {
@@ -14,12 +21,31 @@ export function getStaticPaths() {
 
 const { lang } = Astro.props;
 const text = content[lang];
-const { sections } = settings;
+
+const components = {
+  hero: Hero,
+  menu: MenuCard,
+  infoStrip: InfoStrip,
+  categories: Categories,
+  order: OrderVisit,
+  franchise: Franchise,
+} satisfies Record<Exclude<SectionId, 'contact'>, unknown>;
+
+// Sections in the order the settings list them; the contact footer always closes the page.
+const sections = (Object.keys(settings.sections) as SectionId[]).filter(
+  (id): id is keyof typeof components => id !== 'contact' && settings.sections[id],
+);
 ---
 
 <Base lang={lang} content={text}>
   <Header lang={lang} content={text} />
   <main>
-    {sections.hero && <Hero content={text} />}
+    {
+      sections.map((id) => {
+        const Section = components[id];
+        return <Section content={text} />;
+      })
+    }
   </main>
+  {settings.sections.contact && <Contact content={text} />}
 </Base>

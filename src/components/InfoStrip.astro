@@ -1,0 +1,26 @@
+---
+import Icon from './Icon.astro';
+import type { Content } from '../lib/types';
+
+interface Props {
+  content: Content;
+}
+
+const { infoStrip } = Astro.props.content;
+---
+
+<section id="infoStrip" class="bg-(--theme-info-bg) text-(--theme-info-ink)">
+  <ul class="mx-auto grid max-w-site grid-cols-2 gap-x-6 gap-y-8 px-4 py-10 lg:grid-cols-4 lg:px-6 lg:py-12">
+    {
+      infoStrip.map((item, i) => (
+        <li class="flex items-center gap-3" data-reveal="up" style={`--reveal-delay: ${i * 0.1}s`}>
+          <Icon name={item.icon} class="size-10 shrink-0 text-(--theme-info-icon)" />
+          <p class="font-small text-sm leading-snug">
+            <strong class="block font-display text-base font-extrabold uppercase">{item.line1}</strong>
+            {item.line2}
+          </p>
+        </li>
+      ))
+    }
+  </ul>
+</section>

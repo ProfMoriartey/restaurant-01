@@ -1,0 +1,69 @@
+---
+// Drawn stand-ins for category photos until real cut-out photos arrive.
+import type { FoodArt } from '../../lib/types';
+
+interface Props {
+  kind: FoodArt;
+  class?: string;
+}
+
+const { kind, class: className } = Astro.props;
+---
+
+<svg viewBox="0 0 200 200" class={className} aria-hidden="true">
+  <ellipse cx="100" cy="172" rx="70" ry="8" fill="#000" opacity="0.25" />
+  {
+    kind === 'burger' && (
+      <g>
+        <path d="M42 140h116c0 14-10 24-24 24H66c-14 0-24-10-24-24z" fill="#d98a32" />
+        <rect x="36" y="118" width="128" height="24" rx="12" fill="#5a3121" />
+        <path d="M38 114h124l-12 10-8 12-8-12h-18l-10 14-8-14h-28l-8 10-6-10H50z" fill="#ffc62e" />
+        <path d="M34 108q8-8 16 0t16 0 16 0 16 0 16 0 16 0 16 0 16 0 4 6v2c0 3-3 5-7 5H40c-4 0-7-2-7-5z" fill="#55b33b" />
+        <path d="M36 104c0-36 30-60 64-60s64 24 64 60c0 4-3 6-7 6H43c-4 0-7-2-7-6z" fill="#e89a3c" />
+        <g fill="#fff3d6">
+          <ellipse cx="80" cy="70" rx="4" ry="2.5" />
+          <ellipse cx="104" cy="62" rx="4" ry="2.5" />
+          <ellipse cx="126" cy="74" rx="4" ry="2.5" />
+          <ellipse cx="94" cy="86" rx="4" ry="2.5" />
+        </g>
+      </g>
+    )
+  }
+  {
+    kind === 'hotdog' && (
+      <g transform="rotate(-12 100 110)">
+        <rect x="24" y="96" width="152" height="34" rx="17" fill="#c06a2b" />
+        <path d="M30 104c0-14 10-22 22-22h96c12 0 22 8 22 22v6H30z" fill="#e89a3c" />
+        <path d="M30 118v-4h140v4c0 14-10 22-22 22H52c-12 0-22-8-22-22z" fill="#d98a32" />
+        <path d="M44 108q8-8 16 0t16 0 16 0 16 0 16 0 16 0 16 0" stroke="#ffc62e" stroke-width="5" fill="none" stroke-linecap="round" />
+      </g>
+    )
+  }
+  {
+    kind === 'fries' && (
+      <g>
+        <g fill="#ffc62e">
+          <rect x="62" y="40" width="12" height="70" rx="3" transform="rotate(-8 68 75)" />
+          <rect x="80" y="30" width="12" height="80" rx="3" />
+          <rect x="98" y="36" width="12" height="76" rx="3" transform="rotate(5 104 74)" />
+          <rect x="116" y="42" width="12" height="70" rx="3" transform="rotate(10 122 77)" />
+          <rect x="90" y="48" width="12" height="66" rx="3" transform="rotate(-4 96 81)" />
+        </g>
+        <path d="M54 88h92l-12 76H66z" fill="#fff" />
+        <path d="M56 100h88l-2 14H58z" fill="#1e1d1e" />
+        <circle cx="100" cy="138" r="12" fill="#ffc62e" />
+      </g>
+    )
+  }
+  {
+    kind === 'drink' && (
+      <g>
+        <path d="M108 26l10-4 3 4-9 4-6 30h-4z" fill="#fff" />
+        <path d="M60 56h80l-10 108H70z" fill="#fff" />
+        <path d="M66 82h68l-7 74H73z" fill="#ff2a00" />
+        <rect x="56" y="48" width="88" height="12" rx="4" fill="#e6e6e6" />
+        <circle cx="100" cy="116" r="12" fill="#fff" opacity="0.85" />
+      </g>
+    )
+  }
+</svg>

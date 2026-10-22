@@ -1,0 +1,47 @@
+---
+import FoodArt from './placeholders/FoodArt.astro';
+import type { Content } from '../lib/types';
+
+interface Props {
+  content: Content;
+}
+
+const { menu, locations } = Astro.props.content;
+const menuLocations = locations.filter((l) => l.menuLink);
+---
+
+<section id="menu" class="bg-(--theme-menu-band) px-4 py-16 lg:py-24" style="--title-shadow: var(--theme-menu-shadow)">
+  <div class="mx-auto grid max-w-5xl overflow-hidden md:grid-cols-2" data-reveal="up">
+    <div class="texture grid place-items-center bg-(--theme-menu-photo-bg) p-8">
+      {
+        menu.image ? (
+          <img
+            src={menu.image.src}
+            alt={menu.image.alt}
+            width={menu.image.width}
+            height={menu.image.height}
+            loading="lazy"
+            class="h-auto w-full max-w-sm"
+          />
+        ) : (
+          <FoodArt kind="burger" class="w-full max-w-xs" />
+        )
+      }
+    </div>
+    <div class="flex flex-col justify-center bg-(--theme-menu-text-bg) px-8 py-12 text-(--theme-menu-ink) lg:px-12">
+      <h2 class="section-title text-6xl lg:text-[5rem]">{menu.title}</h2>
+      <p class="mt-5 font-small text-lg">{menu.tagline}</p>
+      <ul class="mt-8 flex flex-wrap gap-3">
+        {
+          menuLocations.map((location) => (
+            <li>
+              <a href={location.menuLink} class="pill">
+                {location.name}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</section>

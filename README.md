@@ -23,6 +23,20 @@ npm run build    # static site in dist/
 | Themes (colors, fonts, title shadow, textures) | `src/themes/` |
 | Sections | `src/components/` |
 
+## Sections
+
+Each one is switched on or off in the restaurant's `settings.ts`. They show in the order listed there; the contact footer always closes the page.
+
+| Section | What it shows |
+| --- | --- |
+| `hero` | Headline with a highlighted word, intro text, cut-out photo |
+| `menu` | Split card with a menu button per location |
+| `infoStrip` | Four icons with two short lines each |
+| `categories` | Category tiles; the name and a short line fade in on hover |
+| `order` | Delivery app buttons per location, and a map panel when `mapEmbedUrl` is set |
+| `franchise` | Enquiry form; set `franchiseFormAction` to a form service endpoint |
+| `contact` | Social links and each location's phone, email, address and hours |
+
 ## Add a restaurant
 
 1. Copy `src/restaurants/flu-burger` to a new folder and edit its settings and text.
