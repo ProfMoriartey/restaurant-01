@@ -49,6 +49,13 @@ Each one is switched on or off in the restaurant's `settings.ts`. They show in t
 | `seo`, `postalAddress` (per location) | Cuisine, price range and the address in parts, for the business details Google reads. |
 | `meta.shareImage` (per language) | The 1200 × 630 image shown when the link is shared on WhatsApp, Instagram or Facebook. |
 
+## Privacy
+
+- The map in the contact footer loads only after the visitor presses "Show map", so Google sets no cookies before then. The choice is remembered in that browser.
+- The site sets no cookies of its own, so it needs no cookie banner. Adding analytics or other embeds would change that.
+- Each language has a privacy notice page (KVKK aydınlatma metni) built from `privacy` in the text files, linked from the footer. The Flu Burger text is a draft: fill in the details in square brackets, have a lawyer check it, then remove `draftNote`.
+- When the franchise form is on, it has a required consent checkbox linking to that page.
+
 ## Add a restaurant
 
 1. Copy `src/restaurants/flu-burger` to a new folder and edit its settings and text.

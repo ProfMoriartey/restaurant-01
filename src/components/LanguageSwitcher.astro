@@ -1,13 +1,18 @@
 ---
 import { getRelativeLocaleUrl } from 'astro:i18n';
 import { settings, content } from '../site.config';
+import { privacyHref } from '../lib/nav';
 
 interface Props {
   lang: string;
+  /** The page being shown, so each language links to the same page. */
+  page?: 'home' | 'privacy';
   class?: string;
 }
 
-const { lang, class: className } = Astro.props;
+const { lang, page = 'home', class: className } = Astro.props;
+const hrefFor = (code: string) =>
+  page === 'privacy' ? privacyHref(code, content[code].privacy.slug) : getRelativeLocaleUrl(code);
 ---
 
 {
@@ -17,7 +22,7 @@ const { lang, class: className } = Astro.props;
         <li class="flex items-center gap-1">
           {i > 0 && <span aria-hidden="true" class="opacity-40">/</span>}
           <a
-            href={getRelativeLocaleUrl(code)}
+            href={hrefFor(code)}
             hreflang={code}
             lang={code}
             aria-label={content[code].languageName}

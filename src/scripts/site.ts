@@ -56,7 +56,7 @@ const sectionObserver = new IntersectionObserver(
   },
   { rootMargin: '-45% 0px -50% 0px' },
 );
-const ids = new Set([...navLinks].map((link) => link.hash.slice(1)));
+const ids = new Set([...navLinks].map((link) => link.hash.slice(1)).filter(Boolean));
 ids.forEach((id) => {
   const section = document.getElementById(id);
   if (section) sectionObserver.observe(section);
@@ -166,3 +166,40 @@ if (document.querySelector('[data-open-status]')) {
   updateOpenStatus();
   setInterval(updateOpenStatus, 60_000);
 }
+
+// Maps load only when asked for, so Google sets no cookies before then. The choice is
+// remembered in this browser so returning visitors see the map straight away.
+const MAP_CHOICE = 'map-allowed';
+
+function loadMap(box: HTMLElement) {
+  const frame = document.createElement('iframe');
+  frame.src = box.dataset.map!;
+  frame.title = box.dataset.mapTitle ?? '';
+  frame.loading = 'lazy';
+  frame.referrerPolicy = 'no-referrer-when-downgrade';
+  frame.allowFullscreen = true;
+  frame.className = 'absolute inset-0 size-full';
+  box.querySelector('[data-map-placeholder]')?.remove();
+  box.append(frame);
+}
+
+document.querySelectorAll<HTMLElement>('[data-map]').forEach((box) => {
+  let allowed = false;
+  try {
+    allowed = localStorage.getItem(MAP_CHOICE) === 'yes';
+  } catch {
+    // Storage can be blocked; the button still works.
+  }
+  if (allowed) {
+    loadMap(box);
+    return;
+  }
+  box.querySelector('[data-map-load]')?.addEventListener('click', () => {
+    try {
+      localStorage.setItem(MAP_CHOICE, 'yes');
+    } catch {
+      // Not remembered, but the map still loads.
+    }
+    loadMap(box);
+  });
+});

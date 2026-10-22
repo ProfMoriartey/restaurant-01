@@ -1,12 +1,15 @@
 ---
 import { settings } from '../site.config';
+import { highlightParts, privacyHref } from '../lib/nav';
 import type { Content } from '../lib/types';
 
 interface Props {
   content: Content;
+  lang: string;
 }
 
-const { franchise } = Astro.props.content;
+const { content, lang } = Astro.props;
+const { franchise } = content;
 ---
 
 <section
@@ -40,6 +43,22 @@ const { franchise } = Astro.props.content;
           </label>
         ))
       }
+      <label class="flex items-start gap-3 font-small text-sm sm:col-span-2">
+        <input type="checkbox" name="consent" required class="mt-0.5 size-5 shrink-0 accent-(--theme-submit-bg)" />
+        <span>
+          {
+            highlightParts(franchise.consent).map((part) =>
+              part.highlight ? (
+                <a href={privacyHref(lang, content.privacy.slug)} target="_blank" class="underline underline-offset-4">
+                  {part.text}
+                </a>
+              ) : (
+                part.text
+              ),
+            )
+          }
+        </span>
+      </label>
       <button
         type="submit"
         class="mt-2 min-h-12 rounded-full bg-(--theme-submit-bg) py-4 font-display text-lg font-extrabold text-(--theme-submit-ink) uppercase transition-opacity duration-300 hover:opacity-85 sm:col-span-2"

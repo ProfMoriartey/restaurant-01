@@ -19,6 +19,9 @@
   /* Halftone dots that fade in towards the right, where the hero photo sits. */
   --tex-halftone: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14'%3E%3Ccircle cx='7' cy='7' r='2' fill='%23fff' fill-opacity='.1'/%3E%3C/svg%3E");
 
+  /* A sketch of streets, shown where the map will load. */
+  --tex-map: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='200'%3E%3Cg fill='none' stroke='%23fff' stroke-opacity='.14' stroke-linecap='round'%3E%3Cpath stroke-width='10' d='M-10 60 C80 40 140 90 330 70M90 -10 C110 80 70 140 110 210'/%3E%3Cpath stroke-width='5' d='M-10 150 L330 130M220 -10 L240 210M-10 20 L140 110M150 210 L330 10'/%3E%3C/g%3E%3C/svg%3E"), linear-gradient(rgb(0 0 0 / 0.12), rgb(0 0 0 / 0.12));
+
   /* Diagonal stripes inside category tiles; neutral so they show on light and dark tiles. */
   --tex-tile-stripes: repeating-linear-gradient(135deg, rgb(128 128 128 / 0.13) 0 14px, transparent 14px 28px);
 }

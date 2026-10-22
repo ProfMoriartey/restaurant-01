@@ -17,10 +17,17 @@ import type { Content, ThemeId } from '../lib/types';
 interface Props {
   lang: string;
   content: Content;
+  /** Page title, when it is not the home page. */
+  title?: string;
+  /** The same page in every language, as paths; defaults to the home page. */
+  alternates?: Record<string, string>;
 }
 
-const { lang, content } = Astro.props;
+const { lang, content, title, alternates } = Astro.props;
 const { meta } = content;
+const pageTitle = title ? `${title} | ${settings.name}` : meta.title;
+const alternateUrl = (code: string) =>
+  alternates ? new URL(alternates[code], Astro.site).href : getAbsoluteLocaleUrl(code);
 const site = Astro.site?.href;
 const pageUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
 const absolute = (path: string) => (site ? new URL(path, site).href : path);
@@ -34,7 +41,7 @@ const browserColor: Record<ThemeId, string> = { 'flu-burger': '#ffffff', 'retro-
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{meta.title}</title>
+    <title>{pageTitle}</title>
     <meta name="description" content={meta.description} />
     <meta name="theme-color" content={browserColor[settings.theme]} />
     <link rel="icon" type="image/png" sizes="32x32" href={settings.icons.favicon} />
@@ -45,16 +52,16 @@ const browserColor: Record<ThemeId, string> = { 'flu-burger': '#ffffff', 'retro-
     {
       site &&
         settings.languages.map((code) => (
-          <link rel="alternate" hreflang={code} href={getAbsoluteLocaleUrl(code)} />
+          <link rel="alternate" hreflang={code} href={alternateUrl(code)} />
         ))
     }
-    {site && <link rel="alternate" hreflang="x-default" href={getAbsoluteLocaleUrl(settings.defaultLanguage)} />}
+    {site && <link rel="alternate" hreflang="x-default" href={alternateUrl(settings.defaultLanguage)} />}
     {site && <link rel="sitemap" href="/sitemap-index.xml" />}
 
     {/* Link previews on WhatsApp, Instagram, Facebook and X. */}
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={settings.name} />
-    <meta property="og:title" content={meta.title} />
+    <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={meta.description} />
     <meta property="og:locale" content={meta.locale} />
     {
@@ -71,9 +78,10 @@ const browserColor: Record<ThemeId, string> = { 'flu-burger': '#ffffff', 'retro-
 
     {/* Business details for Google: address, hours, phone, menu. */}
     {
-      restaurantSchema(settings, content, pageUrl, site).map((schema) => (
-        <script type="application/ld+json" set:html={JSON.stringify(schema)} />
-      ))
+      !alternates &&
+        restaurantSchema(settings, content, pageUrl, site).map((schema) => (
+          <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+        ))
     }
     <script is:inline>document.documentElement.classList.add('js');</script>
   </head>

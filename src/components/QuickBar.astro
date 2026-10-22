@@ -7,9 +7,11 @@ import type { Content, IconName, QuickAction, SocialPlatform } from '../lib/type
 
 interface Props {
   content: Content;
+  /** Prefix for links to home page sections; empty on the home page itself. */
+  base?: string;
 }
 
-const { content } = Astro.props;
+const { content, base = '' } = Astro.props;
 const location = content.locations[0];
 
 const targets: Record<QuickAction, { href?: string; icon: IconName | SocialPlatform }> = {
@@ -25,7 +27,8 @@ const targets: Record<QuickAction, { href?: string; icon: IconName | SocialPlatf
 
 const actions = settings.quickActions
   .map((id) => ({ id, label: content.ui.quickActions[id], ...targets[id] }))
-  .filter((action) => action.href);
+  .filter((action) => action.href)
+  .map((action) => ({ ...action, href: action.href!.startsWith('#') ? base + action.href : action.href }));
 ---
 
 {

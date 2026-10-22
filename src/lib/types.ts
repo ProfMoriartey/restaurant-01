@@ -139,6 +139,8 @@ export interface Content {
       /** Spans both columns. */
       wide?: boolean;
     }[];
+    /** Required consent checkbox; wrap the words that link to the privacy page in *asterisks*. */
+    consent: string;
     submit: string;
   };
   contact: {
@@ -147,7 +149,22 @@ export interface Content {
     labels: { phone: string; email: string; address: string; hours: string };
     directions: string;
     mapTitle: string;
+    /** Shown over the map until a visitor chooses to load it. */
+    map: { notice: string; show: string };
+    privacyLink: string;
     rights: string;
+  };
+  /** Privacy notice page (KVKK aydınlatma metni). */
+  privacy: {
+    /** Last part of the address, e.g. 'gizlilik' for /gizlilik. */
+    slug: string;
+    title: string;
+    updated: string;
+    /** Shown at the top while the text is a draft; remove once it is final. */
+    draftNote?: string;
+    intro: string;
+    sections: { heading: string; paragraphs: string[] }[];
+    backHome: string;
   };
   locations: Location[];
 }

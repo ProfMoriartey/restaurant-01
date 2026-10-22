@@ -8,11 +8,14 @@ import type { Content } from '../lib/types';
 interface Props {
   lang: string;
   content: Content;
+  page?: 'home' | 'privacy';
 }
 
-const { lang, content } = Astro.props;
+const { lang, content, page = 'home' } = Astro.props;
 const links = navLinks(settings, content);
 const home = getRelativeLocaleUrl(lang);
+// Section links jump within the home page, or back to it from other pages.
+const base = page === 'home' ? '' : home;
 ---
 
 <header class="bg-header text-header-ink">
@@ -32,13 +35,13 @@ const home = getRelativeLocaleUrl(lang);
         {
           links.map((link) => (
             <li>
-              <a href={`#${link.id}`} class="nav-link" data-nav-link>
+              <a href={`${base}#${link.id}`} class="nav-link" data-nav-link>
                 {link.label}
               </a>
             </li>
           ))
         }
-        <li><LanguageSwitcher lang={lang} class="text-[17px]" /></li>
+        <li><LanguageSwitcher lang={lang} page={page} class="text-[17px]" /></li>
       </ul>
     </nav>
 
@@ -73,7 +76,7 @@ const home = getRelativeLocaleUrl(lang);
         {
           links.map((link) => (
             <li>
-              <a href={`#${link.id}`} class="nav-link" data-nav-link>
+              <a href={`${base}#${link.id}`} class="nav-link" data-nav-link>
                 {link.label}
               </a>
             </li>
@@ -81,6 +84,6 @@ const home = getRelativeLocaleUrl(lang);
         }
       </ul>
     </nav>
-    <LanguageSwitcher lang={lang} class="mt-auto text-xl" />
+    <LanguageSwitcher lang={lang} page={page} class="mt-auto text-xl" />
   </div>
 </header>
