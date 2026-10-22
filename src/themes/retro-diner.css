@@ -15,13 +15,6 @@
   --theme-panel-bg: #560006;
   --theme-panel-ink: #f9e4a7;
 
-  /* Kept for the sections still to come. */
-  --theme-brick: #902a2a;
-  --theme-mustard: #e8aa0c;
-  --theme-mustard-textured: #e9b04a;
-  --theme-slate: #334a52;
-  --theme-cream: #f9e4a7;
-
   --theme-font-display: 'Roboto Slab', Georgia, serif;
   --theme-font-body: 'Roboto Slab', Georgia, serif;
   --theme-font-small: 'Be Vietnam Pro', system-ui, sans-serif;
@@ -29,19 +22,30 @@
   --theme-headline-weight: 600;
   --theme-headline-tracking: 0;
 
-  /* Sections. Each *-shadow is the colour of that section's offset title shadow. */
+  /* Off-white bands between the coloured sections. */
+  --theme-band: #f3ebe3;
+  --theme-band-gap: clamp(3rem, 6vw, 6rem);
+  --theme-band-image: var(--tex-grain);
+
+  /* Sections. Each *-image is the background layer drawn over that section's colour,
+     and each *-shadow is the colour of its offset title shadow. */
+  --theme-hero-image: radial-gradient(circle at 76% 52%, rgb(204 4 4 / 0.35), transparent 45%), var(--tex-grain);
+
   --theme-info-bg: #f9e4a7;
+  --theme-info-image: var(--tex-grain);
   --theme-info-ink: #384951;
   --theme-info-icon: #902a2a;
-  --theme-info-border: #3849511f;
 
-  --theme-menu-band: #f3ebe3;
+  --theme-menu-bg: #334a52;
+  --theme-menu-image: var(--tex-ribs);
   --theme-menu-photo-bg: #e8aa0c;
+  --theme-menu-photo-image: var(--tex-grunge);
   --theme-menu-text-bg: #902a2a;
   --theme-menu-ink: #f9e4a7;
   --theme-menu-shadow: rgb(0 0 0 / 0.35);
 
   --theme-grid-bg: #e9b04a;
+  --theme-grid-image: var(--tex-grunge);
   --theme-grid-ink: #f9e4a7;
   --theme-grid-shadow: #902a2a;
   --theme-tile-a: #902a2a;
@@ -51,8 +55,13 @@
   --theme-tile-back-ink: #f9e4a7;
 
   --theme-order-bg: #902a2a;
+  --theme-order-image: var(--tex-grain);
   --theme-order-ink: #f9e4a7;
   --theme-order-shadow: rgb(0 0 0 / 0.35);
+  --theme-order-button-bg: #334a52;
+  --theme-order-button-ink: #f9e4a7;
+  --theme-order-button-hover-bg: #f9e4a7;
+  --theme-order-button-hover-ink: #334a52;
 
   --theme-button-bg: #334a52;
   --theme-button-ink: #f9e4a7;
@@ -60,6 +69,7 @@
   --theme-button-hover-ink: #334a52;
 
   --theme-franchise-bg: #334a52;
+  --theme-franchise-image: var(--tex-ribs);
   --theme-franchise-ink: #f9e4a7;
   --theme-franchise-shadow: rgb(0 0 0 / 0.35);
   --theme-input-bg: rgb(144 42 42 / 0.55);
@@ -68,6 +78,7 @@
   --theme-submit-ink: #334a52;
 
   --theme-footer-bg: #e9b04a;
+  --theme-footer-image: var(--tex-grunge);
   --theme-footer-ink: #384951;
   --theme-footer-shadow: #902a2a;
   --theme-footer-icon: #902a2a;
@@ -75,11 +86,4 @@
   --theme-footer-button-ink: #f9e4a7;
   --theme-footer-button-hover-bg: #902a2a;
   --theme-footer-button-hover-ink: #f9e4a7;
-
-  /* Fine vertical stripes for slate sections, diagonal stripes inside tiles. */
-  --theme-stripes: repeating-linear-gradient(90deg, rgb(255 255 255 / 0.04) 0 2px, transparent 2px 9px);
-  --theme-tile-stripes: repeating-linear-gradient(135deg, rgb(255 255 255 / 0.09) 0 14px, transparent 14px 28px);
-
-  /* Paper grain for mustard sections. */
-  --theme-texture: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .12 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }

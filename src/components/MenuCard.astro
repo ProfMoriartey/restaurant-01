@@ -10,9 +10,9 @@ const { menu, locations } = Astro.props.content;
 const menuLocations = locations.filter((l) => l.menuLink);
 ---
 
-<section id="menu" class="bg-(--theme-menu-band) px-4 py-16 lg:py-24" style="--title-shadow: var(--theme-menu-shadow)">
+<section id="menu" class="bg-(--theme-menu-bg) [background-image:var(--theme-menu-image)] px-4 py-16 lg:py-24" style="--title-shadow: var(--theme-menu-shadow)">
   <div class="mx-auto grid max-w-5xl overflow-hidden md:grid-cols-2" data-reveal="up">
-    <div class="texture grid place-items-center bg-(--theme-menu-photo-bg) p-8">
+    <div class="grid place-items-center bg-(--theme-menu-photo-bg) [background-image:var(--theme-menu-photo-image)] p-8">
       {
         menu.image ? (
           <img

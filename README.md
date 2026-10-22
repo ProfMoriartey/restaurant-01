@@ -48,6 +48,8 @@ Each one is switched on or off in the restaurant's `settings.ts`. They show in t
 - `flu-burger`: clean red, black and white with a geometric sans-serif.
 - `retro-diner`: burgundy, brick, mustard and slate with Roboto Slab and paper textures.
 
+Every section's background is a colour plus a texture layer (`--theme-<section>-image`), with light bands between sections (`--theme-band`). The textures (grunge, paper grain, ribs, halftone dots, tile stripes) live in `src/styles/textures.css` and work over any colour.
+
 To add one, copy a file in `src/themes/`, change the `data-theme` name and values, import it in `src/styles/global.css` and add its name to `ThemeId` in `src/lib/types.ts`.
 
 ## Languages

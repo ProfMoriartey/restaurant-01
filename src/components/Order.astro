@@ -11,8 +11,8 @@ const { order, locations } = Astro.props.content;
 
 <section
   id="order"
-  class="overflow-hidden bg-(--theme-order-bg) px-4 py-16 text-(--theme-order-ink) lg:py-24"
-  style="--title-shadow: var(--theme-order-shadow)"
+  class="overflow-hidden bg-(--theme-order-bg) [background-image:var(--theme-order-image)] px-4 py-16 text-(--theme-order-ink) lg:py-24"
+  style="--title-shadow: var(--theme-order-shadow); --button-bg: var(--theme-order-button-bg); --button-ink: var(--theme-order-button-ink); --button-hover-bg: var(--theme-order-button-hover-bg); --button-hover-ink: var(--theme-order-button-hover-ink)"
 >
   <div class="mx-auto grid max-w-site items-center gap-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] lg:px-6">
     <div>

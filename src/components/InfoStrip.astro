@@ -9,7 +9,7 @@ interface Props {
 const { infoStrip } = Astro.props.content;
 ---
 
-<section id="infoStrip" class="bg-(--theme-info-bg) text-(--theme-info-ink)">
+<section id="infoStrip" class="bg-(--theme-info-bg) [background-image:var(--theme-info-image)] text-(--theme-info-ink)">
   <ul class="mx-auto grid max-w-site grid-cols-2 gap-x-6 gap-y-8 px-4 py-10 lg:grid-cols-4 lg:px-6 lg:py-12">
     {
       infoStrip.map((item, i) => (

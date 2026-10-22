@@ -39,7 +39,8 @@ const sections = (Object.keys(settings.sections) as SectionId[]).filter(
 
 <Base lang={lang} content={text}>
   <Header lang={lang} content={text} />
-  <main>
+  <!-- Light bands separate the coloured sections, as in the theme's --theme-band. -->
+  <main class="flex flex-col gap-(--theme-band-gap) bg-(--theme-band) [background-image:var(--theme-band-image)] pb-(--theme-band-gap)">
     {
       sections.map((id) => {
         const Section = components[id];

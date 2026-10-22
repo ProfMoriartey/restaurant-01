@@ -1,0 +1,24 @@
+/* Background textures shared by all themes. Each one is a transparent layer,
+   so a theme sets it over any colour, e.g. `background: var(--tex-grunge), #ff2a00`. */
+:root {
+  /* Brushed, distressed patches with fine specks, like worn print. */
+  --tex-grunge: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='640' height='640'%3E%3Cfilter id='a' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.0125 .046875' numOctaves='4' seed='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 8 0 0 0 -4.4'/%3E%3C/filter%3E%3Cfilter id='b' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.703125' numOctaves='2' seed='9' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 30 0 0 0 -19'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23a)' opacity='.16'/%3E%3Crect width='100%25' height='100%25' filter='url(%23b)' opacity='.14'/%3E%3C/svg%3E");
+
+  /* Fine paper grain. */
+  --tex-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+
+  /* Raised vertical ribs: a highlight edge fading into shadow, every 13px. */
+  --tex-ribs: repeating-linear-gradient(
+    90deg,
+    rgb(255 255 255 / 0.07) 0 1px,
+    transparent 1px,
+    rgb(0 0 0 / 0.28) 12px,
+    rgb(255 255 255 / 0.07) 12px 13px
+  );
+
+  /* Halftone dots that fade in towards the right, where the hero photo sits. */
+  --tex-halftone: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14'%3E%3Ccircle cx='7' cy='7' r='2' fill='%23fff' fill-opacity='.1'/%3E%3C/svg%3E");
+
+  /* Diagonal stripes inside category tiles; neutral so they show on light and dark tiles. */
+  --tex-tile-stripes: repeating-linear-gradient(135deg, rgb(128 128 128 / 0.13) 0 14px, transparent 14px 28px);
+}

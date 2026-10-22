@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+@import './textures.css';
 @import '../themes/flu-burger.css';
 @import '../themes/retro-diner.css';
 
@@ -89,14 +90,6 @@
     transform: translateY(-2px);
   }
 
-  .texture {
-    background-image: var(--theme-texture);
-  }
-
-  .stripes {
-    background-image: var(--theme-stripes);
-  }
-
   .field {
     width: 100%;
     border: 1px solid var(--theme-input-border);
@@ -126,7 +119,7 @@
     overflow: hidden;
     border: 7px solid var(--theme-tile-frame);
     background-color: var(--tile-bg);
-    background-image: var(--theme-tile-stripes);
+    background-image: var(--tex-tile-stripes);
   }
 
   .tile-back {
